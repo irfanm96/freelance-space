@@ -18,7 +18,7 @@ class CreateTeamsTable extends Migration
             $table->string('name');
             $table->unsignedInteger('leader_id');
             $table->unsignedInteger('owner_id')->nullable();
-            $table->string('owner_email');
+            $table->string('owner_email')->nullable();
             $table->timestamps();
         });
         Schema::create('team_user', function (Blueprint $table) {
