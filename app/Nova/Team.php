@@ -49,7 +49,8 @@ class Team extends Resource
             Text::make('Name'),
             BelongsTo::make('Leader','leader',User::class),
             BelongsTo::make('Owner', 'owner', User::class),
-            BelongsToMany::make('Users')
+            HasMany::make('Projects'),
+            BelongsToMany::make('Users'),
         ];
     }
 

@@ -4,8 +4,13 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use OptimistDigital\MultiselectField\Multiselect;
 
 class Project extends Resource
 {
@@ -42,7 +47,22 @@ class Project extends Resource
     {
         return [
             ID::make()->sortable(),
-            HasMany::make('Tasks')
+            Text::make("Name"),
+            Textarea::make('Description'),
+            Multiselect
+                ::make('Project Type', 'type')
+                ->options([
+                    'android' => 'Android',
+                    'ios' => 'IOS',
+                    'flutter' => 'Flutter',
+                    'web' => 'Web'
+                ])
+                ->placeholder('Choose project type') // Placeholder text
+                ->saveAsJSON(), // Saves value as JSON if the database column is of JSON type
+            Number::make('Rate'),
+            BelongsTo::make('Team'),
+            HasMany::make('Tasks'),
+            HasMany::make('Invoices'),
         ];
     }
 

@@ -28,13 +28,6 @@ class CreateProjectsTable extends Migration
             $table->string('task_id');
             $table->timestamps();
         });
-        Schema::create('invoice_project', function (Blueprint $table) {
-            $table->id();
-            $table->string('invoice_id');
-            $table->string('project_id');
-            $table->timestamps();
-        });
-
     }
 
     /**
@@ -46,6 +39,5 @@ class CreateProjectsTable extends Migration
     {
         Schema::dropIfExists('projects');
         Schema::dropIfExists('project_task');
-        Schema::dropIfExists('invoice_project');
     }
 }

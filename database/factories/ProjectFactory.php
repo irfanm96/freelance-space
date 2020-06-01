@@ -10,7 +10,7 @@ $factory->define(Project::class, function (Faker $faker) {
         'name' => $faker->word(),
         'description' => $faker->sentence(),
         'type' => ['web','mobile'],
-        'rate' => $faker->randomFloat(),
+        'rate' => $faker->randomDigit(3),
         'team_id' => $faker->randomElement([1,2,3])
     ];
 });

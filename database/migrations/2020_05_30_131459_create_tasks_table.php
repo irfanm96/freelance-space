@@ -16,6 +16,7 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedInteger('project_id');
             $table->string('description')->nullable();
             $table->enum('type', ['backlog', 'in_progress', 'in_staging', 'completed'])->default('backlog');
             $table->dateTime('finished_date')->nullable();

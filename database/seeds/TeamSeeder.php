@@ -1,5 +1,6 @@
 <?php
 
+use App\Project;
 use App\Team;
 use App\User;
 use Illuminate\Database\Seeder;
@@ -15,6 +16,7 @@ class TeamSeeder extends Seeder
     {
         factory(Team::class,10)->create()->each(function ($q){
             $q->users()->saveMany(factory(User::class, 3)->make());
+            $q->projects()->saveMany(factory(Project::class, 3)->make());
         });
     }
 }
