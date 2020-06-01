@@ -10,6 +10,5 @@ $factory->define(Team::class, function (Faker $faker) {
         'name' => $faker->word(),
         'leader_id' => $faker->randomElement([1,2]),
         'owner_id' => $faker->randomElement([1]),
-        'owner_email' => $faker->email
     ];
 });

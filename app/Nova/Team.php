@@ -2,8 +2,13 @@
 
 namespace App\Nova;
 
-use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
+use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Team extends Resource
@@ -20,7 +25,7 @@ class Team extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -41,6 +46,10 @@ class Team extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name'),
+            BelongsTo::make('Leader','leader',User::class),
+            BelongsTo::make('Owner', 'owner', User::class),
+            BelongsToMany::make('Users')
         ];
     }
 
