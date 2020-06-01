@@ -22,12 +22,6 @@ class CreateProjectsTable extends Migration
             $table->unsignedInteger('team_id');
             $table->timestamps();
         });
-        Schema::create('project_task', function (Blueprint $table) {
-            $table->id();
-            $table->string('project_id');
-            $table->string('task_id');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -38,6 +32,5 @@ class CreateProjectsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('projects');
-        Schema::dropIfExists('project_task');
     }
 }
