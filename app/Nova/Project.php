@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\EnableTrello;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -114,6 +115,8 @@ class Project extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new EnableTrello
+        ];
     }
 }
