@@ -31,7 +31,6 @@ class InitProjectBoard implements ShouldQueue
     {
         $this->project = $project;
         $this->board_url = $project->board_url . '.json';
-
     }
 
     /**
@@ -41,6 +40,7 @@ class InitProjectBoard implements ShouldQueue
      */
     public function handle()
     {
+        ld('job started');
         $api_token = env('TRELLO_API_TOKEN');
         $api_key = env('TRELLO_API_KEY');
 
@@ -55,21 +55,22 @@ class InitProjectBoard implements ShouldQueue
         $this->project->update(['board_id' => $boardID]);
 
         $created_webhooks = [];
-        foreach($this->lists as $list){
-            $list_id = $this->createList($list['name'],$boardID);
-            if($list_id!=null){
-             $webhook_id = $this->createWebHook($list_id,$list['webhook_description'],$list['type']);
-                if($webhook_id!=null){
+        foreach ($this->lists as $list) {
+            $list_id = $this->createList($list['name'], $boardID);
+            if ($list_id != null) {
+                ld('created a list');
+                $webhook_id = $this->createWebHook($list_id, $list['webhook_description'], $list['type']);
+                if ($webhook_id != null) {
                     $created_webhooks[] = new Webhook([
                         'project_id' => $this->project->id,
                         'list_id' => $list_id,
                         'webhook_id' => $webhook_id,
                         'type' => $list['type']
-                        ]);
+                    ]);
                 }
             }
         }
-        if(count($created_webhooks)>0){
+        if (count($created_webhooks) > 0) {
             Webhook::insert($created_webhooks);
         }
     }
@@ -96,12 +97,12 @@ class InitProjectBoard implements ShouldQueue
         $response = Http::withHeaders([
             'Accept' => 'application/json',
         ])->post('https://api.trello.com/1/webhooks/', [
-                'idModel' => $list_id,
-                'key' => $api_key,
-                'description' => $description,
-                'token' => $api_token,
-                'callbackURL' => route("project.webhook.$type", $this->project->id)
-            ]);
+            'idModel' => $list_id,
+            'key' => $api_key,
+            'description' => $description,
+            'token' => $api_token,
+            'callbackURL' => route("project.webhook.$type", $this->project->id)
+        ]);
         if ($response->failed()) {
             ld($response->body());
             ld('webhook creation failed');
