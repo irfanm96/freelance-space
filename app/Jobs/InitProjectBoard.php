@@ -108,6 +108,8 @@ class InitProjectBoard implements ShouldQueue
             return null;
         }
         $response = $response->json();
+        ld('webhook created sucessfully');
+        ld($response);
         return $response['id'];
     }
 }
