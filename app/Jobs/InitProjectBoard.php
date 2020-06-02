@@ -103,6 +103,8 @@ class InitProjectBoard implements ShouldQueue
                 'callbackURL' => route("project.webhook.$type", $this->project_id)
             ]);
         if ($response->failed()) {
+            ld($response->body());
+            ld('webhook creation failed');
             return null;
         }
         $response = $response->json();
