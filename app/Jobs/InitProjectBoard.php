@@ -70,6 +70,14 @@ class InitProjectBoard implements ShouldQueue
             }
         }
     }
+    curl -X POST -H "Content-Type: application/json" \
+https://api.trello.com/1/tokens/21f05a382396ccb4e41fe0e87f5f53ccbb48cd8a747d48eb1de079dfd9cf4b3d/webhooks/ \
+-d '{
+  "key": "8730e5771851bda022e49431033d7dba",
+  "callbackURL": "https://freelancer.irfanm.me/project/webhook/in_production/30",
+  "idModel":"5ed61a3a14abff7172a00917",
+  "description": "My first webhook"
+}'
     public function createList($name, $board_id)
     {
         $api_token = env('TRELLO_API_TOKEN');
