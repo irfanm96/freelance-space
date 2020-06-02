@@ -22,7 +22,7 @@ Auth::routes();
 Route::view('dashboard', 'dashboard');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/project/webhook/sprint_backlog/{project}',function(Project $project){
+Route::post('/project/webhook/sprint_backlog/{project}', function (Project $project) {
     ld('project.webhook.sprint_backlog');
     ld(request()->all());
     return response('ok')->setStatusCode(200);
@@ -43,5 +43,27 @@ Route::post('/project/webhook/in_staging/{project}', function (Project $project)
 Route::post('/project/webhook/in_production/{project}', function (Project $project) {
     ld('project.webhook.in_production');
     ld(request()->all());
+    return response('ok')->setStatusCode(200);
+})->name('project.webhook.in_production');
+
+Route::post('/project/webhook/in_production/{project}', function (Project $project) {
+    ld('project.webhook.in_production');
+    ld(request()->all());
+    return response('ok')->setStatusCode(200);
+})->name('project.webhook.in_production');
+
+Route::get('/project/webhook/sprint_backlog/{project}', function (Project $project) {
+    return response('ok')->setStatusCode(200);
+})->name('project.webhook.sprint_backlog');
+
+Route::get('/project/webhook/in_progress/{project}', function (Project $project) {
+    return response('ok')->setStatusCode(200);
+})->name('project.webhook.in_progress');
+
+Route::get('/project/webhook/in_staging/{project}', function (Project $project) {
+    return response('ok')->setStatusCode(200);
+})->name('project.webhook.in_staging');
+
+Route::get('/project/webhook/in_production/{project}', function (Project $project) {
     return response('ok')->setStatusCode(200);
 })->name('project.webhook.in_production');
