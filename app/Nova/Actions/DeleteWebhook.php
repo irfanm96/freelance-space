@@ -32,6 +32,7 @@ class DeleteWebhook extends Action
             ]);
             if ($response->failed()) {
                 ld('webhook delete failed');
+                ld($response->body());
             }
             $webhook->delete();
             ld('webhook deleted sucessfully');
