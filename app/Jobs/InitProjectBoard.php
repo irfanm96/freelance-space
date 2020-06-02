@@ -64,7 +64,7 @@ class InitProjectBoard implements ShouldQueue
                         'project_id' => $this->project->id,
                         'list_id' => $list_id,
                         'webhook_id' => $webhook_id,
-                        'type' => $list['type']
+                        'webhook_type' => $list['type']
                     ]);
                 }
             }
