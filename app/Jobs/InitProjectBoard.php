@@ -97,6 +97,7 @@ class InitProjectBoard implements ShouldQueue
             'key' => $api_key,
             'description' => $description,
             'token' => $api_token,
+            // 'callbackURL' => route("project.webhook.$type", $this->project->id)
             'callbackURL' => route("project.webhook.$type", $this->project->id)
         ]);
         if ($response->failed()) {
