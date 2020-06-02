@@ -20,7 +20,7 @@ class InitProjectBoard implements ShouldQueue
         ['name' => 'Sprint BackLog', 'webhook_description' => 'Sprint backlog webhook', 'type' => 'sprint_backlog'],
         ['name' => 'In Progress', 'webhook_description' => 'In Progress webhook', 'type' => 'in_progress'],
         ['name' => 'In Staging', 'webhook_description' => 'In Staging webhook', 'type' => 'in_staging'],
-        ['name' => 'In Production', 'webhook_description' => 'In Prodcution webhook', 'type' => 'in_prodcution'],
+        ['name' => 'In Production', 'webhook_description' => 'In Prodcution webhook', 'type' => 'in_production'],
     ];
     /**
      * Create a new job instance.
