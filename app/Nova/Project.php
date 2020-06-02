@@ -60,13 +60,17 @@ class Project extends Resource
                 ->placeholder('Choose project type') // Placeholder text
                 ->saveAsJSON(), // Saves value as JSON if the database column is of JSON type
             Number::make('Rate'),
+            Text::make('Board Url', function () {
+                return '<a target="_blank" href="'.$this->board_url.'">'.$this->board_url.'</a>';
+            })->asHtml()->exceptOnForms(),
+            Text::make('Board Url')->onlyOnForms(),
             BelongsTo::make('Team'),
             HasMany::make('Tasks'),
             HasMany::make('Invoices'),
         ];
     }
-//     curl --request POST \
-//   --url 'https://api.trello.com/1/lists?name=testList&idBoard=5ed5cd14c1b0a32e7493e8ea&key=8730e5771851bda022e49431033d7dba&token=21f05a382396ccb4e41fe0e87f5f53ccbb48cd8a747d48eb1de079dfd9cf4b3d'
+    //     curl --request POST \
+    //   --url 'https://api.trello.com/1/lists?name=testList&idBoard=5ed5cd14c1b0a32e7493e8ea&key=8730e5771851bda022e49431033d7dba&token=21f05a382396ccb4e41fe0e87f5f53ccbb48cd8a747d48eb1de079dfd9cf4b3d'
 
 
     /**
