@@ -58,7 +58,7 @@ class InitProjectBoard implements ShouldQueue
         foreach($this->lists as $list){
             $list_id = $this->createList($list['name'],$boardID);
             if($list_id!=null){
-             $webhook_id = $this->createWebHook($list_id,$list['description'],$list['type']);
+             $webhook_id = $this->createWebHook($list_id,$list['webhook_description'],$list['type']);
                 if($webhook_id!=null){
                     $created_webhooks[] = new Webhook([
                         'project_id' => $this->project->id,
