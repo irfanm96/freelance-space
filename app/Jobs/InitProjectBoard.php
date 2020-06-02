@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Project;
+use App\Webhook;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
@@ -13,7 +15,7 @@ class InitProjectBoard implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $board_url;
-    protected $project_id;
+    protected Project $project;
     protected $lists = [
         ['name' => 'Sprint BackLog', 'webhook_description' => 'Sprint backlog webhook', 'type' => 'sprint_backlog'],
         ['name' => 'In Progress', 'webhook_description' => 'In Progress webhook', 'type' => 'in_progress'],
@@ -25,10 +27,11 @@ class InitProjectBoard implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($project_id, $board_url)
+    public function __construct(Project $project)
     {
-        $this->board_url = $board_url . '.json';
-        $this->project_id = $project_id;
+        $this->project = $project;
+        $this->board_url = $project->board_url . '.json';
+
     }
 
     /**
@@ -49,6 +52,26 @@ class InitProjectBoard implements ShouldQueue
         }
         $response = $response->json();
         $boardID = $response['id'];
+        $this->project->update(['board_id' => $boardID]);
+
+        $created_webhooks = [];
+        foreach($this->lists as $list){
+            $list_id = $this->createList($list['name'],$boardID);
+            if($list_id!=null){
+             $webhook_id = $this->createWebHook($list_id,$list['description'],$list['type']);
+                if($webhook_id!=null){
+                    $created_webhooks[] = new Webhook([
+                        'project_id' => $this->project->id,
+                        'list_id' => $list_id,
+                        'webhook_id' => $webhook_id,
+                        'type' => $list['type']
+                        ]);
+                }
+            }
+        }
+        if(count($created_webhooks)>0){
+            Webhook::insert($created_webhooks);
+        }
     }
     public function createList($name, $board_id)
     {
@@ -79,6 +102,10 @@ class InitProjectBoard implements ShouldQueue
                 'token' => $api_token,
                 'callbackURL' => route("project.webhook.$type", $this->project_id)
             ]);
-        return !$response->failed();
+        if ($response->failed()) {
+            return null;
+        }
+        $response = $response->json();
+        return $response['id'];
     }
 }

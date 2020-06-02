@@ -19,6 +19,8 @@ class CreateProjectsTable extends Migration
             $table->string('description')->nullable();
             $table->json('type');
             $table->float('rate');
+            $table->string('board_url')->nullable();
+            $table->string('board_id')->nullable();
             $table->unsignedInteger('team_id');
             $table->timestamps();
         });

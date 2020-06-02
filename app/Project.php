@@ -19,6 +19,10 @@ class Project extends Model
     {
         return $this->hasMany(Invoice::class);
     }
+    public function webhooks()
+    {
+        return $this->hasMany(Webhook::class);
+    }
     public function team()
     {
         return $this->belongsTo(Team::class);
