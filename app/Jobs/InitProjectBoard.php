@@ -17,10 +17,10 @@ class InitProjectBoard implements ShouldQueue
     protected $board_url;
     protected Project $project;
     protected $lists = [
-        ['name' => 'Sprint BackLog', 'webhook_description' => 'Sprint backlog webhook', 'type' => 'sprint_backlog'],
-        ['name' => 'In Progress', 'webhook_description' => 'In Progress webhook', 'type' => 'in_progress'],
-        ['name' => 'In Staging', 'webhook_description' => 'In Staging webhook', 'type' => 'in_staging'],
         ['name' => 'In Production', 'webhook_description' => 'In Prodcution webhook', 'type' => 'in_production'],
+        ['name' => 'In Staging', 'webhook_description' => 'In Staging webhook', 'type' => 'in_staging'],
+        ['name' => 'In Progress', 'webhook_description' => 'In Progress webhook', 'type' => 'in_progress'],
+        ['name' => 'Sprint BackLog', 'webhook_description' => 'Sprint backlog webhook', 'type' => 'sprint_backlog'],
     ];
     /**
      * Create a new job instance.
