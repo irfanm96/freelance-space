@@ -30,7 +30,7 @@ class TaskController extends Controller
 
     public function handleSprintBacklogList($project_id, Request $request)
     {
-        $payload = $request->input('action');
+         $payload = $request->input('action');
         $payload['project_id'] = $project_id;
         $this->handleCardAction('sprint_backlog', $payload);
     }
