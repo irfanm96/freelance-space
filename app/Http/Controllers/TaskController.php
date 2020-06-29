@@ -66,7 +66,12 @@ class TaskController extends Controller
             $data['type'] = $webhook->webhook_type;
         }
         ld('update task with ', $data);
-        Task::updateOrCreate($data);
+        $task = Task::where('trello_card_id', $data['trello_card_id'])->first();
+        if (!$task) {
+            Task::create($data);
+        } else {
+            $task->update($data);
+        }
     }
 
     protected function handleCardAction($task)
