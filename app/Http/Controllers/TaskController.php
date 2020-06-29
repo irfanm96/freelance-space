@@ -18,7 +18,7 @@ class TaskController extends Controller
         $task['trello_card_id'] = $payload['data']['card']['id'];
         $task['action_type'] = $payload['type'];
         $task['display'] = $payload['display'];
-
+        ld($task);
         return $task;
     }
 
