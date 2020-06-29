@@ -16,7 +16,7 @@ class TaskController extends Controller
         $task['type'] = $type;
         $task['name'] = $payload['data']['card']['name'];
         $task['trello_card_id'] = $payload['data']['card']['id'];
-        $task['action_type'] = $payload['type'];
+        $task["action_type"] = $payload['type'];
         $task['display'] = $payload['display'];
         return $task;
     }
@@ -71,7 +71,7 @@ class TaskController extends Controller
 
     protected function handleCardAction($task)
     {
-        $action_type = $task['action_type'];
+        $action_type = $task["action_type"];
         ld('processed task', $task);
         switch ($action_type) {
             case 'createCard':
