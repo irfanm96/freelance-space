@@ -81,7 +81,7 @@ class TaskController extends Controller
                 break;
             case 'updateCard':
                 ld('update card', $task);
-                unset($task['action_type']);
+                unset($task["action_type"]);
                 $this->handleUpdateCard($task);
                 break;
             default:
