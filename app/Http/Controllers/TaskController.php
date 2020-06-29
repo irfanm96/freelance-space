@@ -7,51 +7,70 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     //
+    private function processPayload($payload)
+    {
+        $task = [];
+        $task['project_id'] = $payload['project_id'];
+        $task['type'] = $payload['type'];
+        $task['name'] = $payload['data']['card']['name'];
+        $task['trello_card_id'] = $payload['data']['card']['id'];
+        $task['action_type'] = $payload['type'];
+        $task['display'] = $payload['display'];
+
+        return $task;
+    }
+
     public function handleInProdcutionList($project_id, Request $request)
     {
         $payload = $request->input('action');
         $payload['project_id'] = $project_id;
-        $this->handleCardAction('in_production', $payload);
+        $payload['type'] = 'in_production';
+        $task = $this->processPayload($payload);
+        $this->handleCardAction($task);
     }
 
     public function handleInStagingList($project_id, Request $request)
     {
         $payload = $request->input('action');
         $payload['project_id'] = $project_id;
-        $this->handleCardAction('in_staging', $payload);
+        $payload['type'] = 'in_staging';
+        $this->handleCardAction($payload);
     }
 
     public function handleInProgressList($project_id, Request $request)
     {
         $payload = $request->input('action');
         $payload['project_id'] = $project_id;
-        $this->handleCardAction('in_progress', $payload);
+        $payload['type'] = 'in_progress';
+        $this->handleCardAction($payload);
     }
 
     public function handleSprintBacklogList($project_id, Request $request)
     {
-         $payload = $request->input('action');
+        $payload = $request->input('action');
         $payload['project_id'] = $project_id;
-        $this->handleCardAction('sprint_backlog', $payload);
+        $payload['type'] = 'sprint_backlog';
+        $this->handleCardAction($payload);
     }
 
-    private function handleCreateCard($list, $data)
+    private function handleCreateCard($data)
+    {
+        unset($data['display']);
+    }
+
+    private function handleUpdateCard($data)
     {
     }
 
-    private function handleUpdateCard($list, $data)
+    protected function handleCardAction($task)
     {
-    }
-
-    protected function handleCardAction($list, $payload)
-    {
-        $type = $payload[''];
-        switch ($type) {
+        $action_type = $task['action_type'];
+        switch ($action_type) {
             case 'createCard':
-                $this->handleCreateCard($list, $payload);
+                $this->handleCreateCard($task);
                 break;
             case 'updateCard':
-                $this->handleUpdateCard($list, $payload);
+                $this->handleUpdateCard($task);
                 break;
             default:
                 break;
