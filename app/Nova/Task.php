@@ -4,8 +4,8 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Task extends Resource
 {
@@ -42,6 +42,9 @@ class Task extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name'),
+            Text::make('Trello card', 'trello_card_id'),
+            Text::make('type'),
             BelongsTo::make('Project')
         ];
     }
