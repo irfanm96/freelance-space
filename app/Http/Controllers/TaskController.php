@@ -18,14 +18,11 @@ class TaskController extends Controller
         $task['trello_card_id'] = $payload['data']['card']['id'];
         $task['action_type'] = $payload['type'];
         $task['display'] = $payload['display'];
-        ld($task);
         return $task;
     }
 
     public function handleInProductionList($project_id, Request $request)
     {
-        ld($request->all());
-
         $task = $this->processPayload($project_id, 'in_production', $request->input('action'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
@@ -33,7 +30,6 @@ class TaskController extends Controller
 
     public function handleInStagingList($project_id, Request $request)
     {
-        ld($request->all());
         $task = $this->processPayload($project_id, 'in_staging', $request->input('action'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
@@ -41,8 +37,6 @@ class TaskController extends Controller
 
     public function handleInProgressList($project_id, Request $request)
     {
-        ld($request->all());
-
         $task = $this->processPayload($project_id, 'in_progress', $request->input('action'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
@@ -50,8 +44,6 @@ class TaskController extends Controller
 
     public function handleSprintBacklogList($project_id, Request $request)
     {
-        ld($request->all());
-
         $task = $this->handleCardAction($project_id, 'sprint_backlog', $request->input('action'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
@@ -68,13 +60,13 @@ class TaskController extends Controller
     {
         $display = $data['display'];
         unset($data['display']);
-        ld($data);
         if ($display['translationKey'] === 'action_move_card_from_list_to_list') {
             $list_after = $display['entities']['listAfter']['id'];
             $webhook = Webhook::where('list_id', $list_after)->first();
             $data['type'] = $webhook->webhook_type;
         }
-        $task = Task::updateOrCreate($data);
+        ld('update task with ', $data);
+        Task::updateOrCreate($data);
     }
 
     protected function handleCardAction($task)
