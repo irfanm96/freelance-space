@@ -90,7 +90,7 @@ class Task extends Resource
      */
     public function lenses(Request $request)
     {
-        return [new CompletedTasks()];
+        return [new CompletedTasks];
     }
 
     /**
