@@ -45,7 +45,6 @@ class Task extends Resource
             ID::make()->sortable(),
             Text::make('Name'),
             Text::make('Trello card', 'trello_card_id'),
-            Text::make('type'),
             Badge::make('type')->map([
                 'sprint_backlog' => 'danger',
                 'in_progress' => 'info',
