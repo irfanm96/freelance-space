@@ -67,7 +67,7 @@ class TaskController extends Controller
     private function handleUpdateCard($data)
     {
         $display = $data['display'];
-        if ($display['action_move_card_from_list_to_list']) {
+        if ($display['translationKey'] === 'action_move_card_from_list_to_list') {
             $list_after = $display['entities']['listAfter'];
             $webhook = Webhook::where('list_id', $list_after)->first();
             $data['type'] = $webhook->webhook_type;
