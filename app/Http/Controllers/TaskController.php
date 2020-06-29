@@ -80,13 +80,16 @@ class TaskController extends Controller
     protected function handleCardAction($task)
     {
         $action_type = $task['action_type'];
-        unset($task['action_type']);
-        ld('handle card action', $action_type);
+        ld('processed task', $task);
         switch ($action_type) {
             case 'createCard':
+                ld('create card');
+                unset($task['action_type']);
                 $this->handleCreateCard($task);
                 break;
             case 'updateCard':
+                ld('update card');
+                unset($task['action_type']);
                 $this->handleUpdateCard($task);
                 break;
             default:
