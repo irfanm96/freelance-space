@@ -3,7 +3,7 @@
 namespace App\Nova\Actions;
 
 use Illuminate\Bus\Queueable;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Actions\Action;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Fields\ActionFields;
@@ -34,9 +34,15 @@ class GenerateInvoice extends Action
     public function fields()
     {
         return [
-            Text::make('template1'),
-            Text::make('template2'),
-            Text::make('template3'),
+            Image::make('Template1')->preview(function ($value, $disk) {
+                return 'https://via.placeholder.com/150?text="template1"';
+            })->readonly(),
+            Image::make('Template2')->preview(function ($value, $disk) {
+                return 'https://via.placeholder.com/150?text="template2"';
+            })->readonly(),
+            Image::make('Template3')->preview(function ($value, $disk) {
+                return 'https://via.placeholder.com/150?text="template3"';
+            })->readonly(),
             RadioButton::make('Chose Template')
             ->options([
                 0 => 'Template 1',
