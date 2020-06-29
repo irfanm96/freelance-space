@@ -1,42 +1,35 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Lenses;
 
-use App\Nova\Lenses\CompletedTasks;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Lenses\Lens;
 use Laravel\Nova\Fields\Badge;
+use Wehaa\Liveupdate\Liveupdate;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Http\Requests\LensRequest;
 
-class Task extends Resource
+class CompletedTasks extends Lens
 {
     /**
-     * The model the resource corresponds to.
+     * Get the query builder / paginator for the lens.
      *
-     * @var string
+     * @param  \Laravel\Nova\Http\Requests\LensRequest  $request
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return mixed
      */
-    public static $model = \App\Task::class;
+    public static function query(LensRequest $request, $query)
+    {
+        return $request->withOrdering($request->withFilters(
+            $query->where('type', 'in_production')
+            ->orderBy('hours')
+        ));
+    }
 
     /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
-    public static $title = 'id';
-
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
-    public static $search = [
-        'id',
-    ];
-
-    /**
-     * Get the fields displayed by the resource.
+     * Get the fields available to the lens.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
@@ -53,13 +46,13 @@ class Task extends Resource
                 'in_staging' => 'warning',
                 'in_production' => 'success'
             ]),
-            Number::make('Hours'),
+            Liveupdate::make('Hours'),
             BelongsTo::make('Project')
         ];
     }
 
     /**
-     * Get the cards available for the request.
+     * Get the cards available on the lens.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
@@ -70,7 +63,7 @@ class Task extends Resource
     }
 
     /**
-     * Get the filters available for the resource.
+     * Get the filters available for the lens.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
@@ -81,24 +74,23 @@ class Task extends Resource
     }
 
     /**
-     * Get the lenses available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function lenses(Request $request)
-    {
-        return [new CompletedTasks()];
-    }
-
-    /**
-     * Get the actions available for the resource.
+     * Get the actions available on the lens.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function actions(Request $request)
     {
-        return [];
+        return parent::actions($request);
+    }
+
+    /**
+     * Get the URI key for the lens.
+     *
+     * @return string
+     */
+    public function uriKey()
+    {
+        return 'completed-tasks';
     }
 }

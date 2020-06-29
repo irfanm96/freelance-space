@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8ef77919337e65282d36c0b9fc96c0e",
+    "content-hash": "94daaf252cea2a39801c94317c270a5d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6077,6 +6077,47 @@
                 "spatie-permission"
             ],
             "time": "2020-04-25T18:30:25+00:00"
+        },
+        {
+            "name": "wehaa/liveupdate",
+            "version": "v0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wehaa/inline-field-update.git",
+                "reference": "1567a6812bf386855e43611791c7c455f976e4de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wehaa/inline-field-update/zipball/1567a6812bf386855e43611791c7c455f976e4de",
+                "reference": "1567a6812bf386855e43611791c7c455f976e4de",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Wehaa\\Liveupdate\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wehaa\\Liveupdate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova field.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "time": "2019-03-28T13:15:20+00:00"
         }
     ],
     "packages-dev": [
