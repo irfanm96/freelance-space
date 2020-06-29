@@ -68,6 +68,7 @@ class TaskController extends Controller
     {
         $display = $data['display'];
         unset($data['display']);
+        ld($data);
         if ($display['translationKey'] === 'action_move_card_from_list_to_list') {
             $list_after = $display['entities']['listAfter']['id'];
             $webhook = Webhook::where('list_id', $list_after)->first();
