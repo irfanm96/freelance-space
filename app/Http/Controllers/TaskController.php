@@ -80,7 +80,7 @@ class TaskController extends Controller
                 $this->handleCreateCard($task);
                 break;
             case 'updateCard':
-                ld('update card');
+                ld('update card', $task);
                 unset($task['action_type']);
                 $this->handleUpdateCard($task);
                 break;
