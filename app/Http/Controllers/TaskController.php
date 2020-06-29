@@ -24,6 +24,8 @@ class TaskController extends Controller
 
     public function handleInProdcutionList($project_id, Request $request)
     {
+        ld($request->all());
+
         $task = $this->processPayload($project_id, 'in_production', $request->input('data'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
@@ -31,6 +33,7 @@ class TaskController extends Controller
 
     public function handleInStagingList($project_id, Request $request)
     {
+        ld($request->all());
         $task = $this->processPayload($project_id, 'in_staging', $request->input('data'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
@@ -38,6 +41,8 @@ class TaskController extends Controller
 
     public function handleInProgressList($project_id, Request $request)
     {
+        ld($request->all());
+
         $task = $this->processPayload($project_id, 'in_progress', $request->input('data'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
@@ -45,6 +50,8 @@ class TaskController extends Controller
 
     public function handleSprintBacklogList($project_id, Request $request)
     {
+        ld($request->all());
+
         $task = $this->handleCardAction($project_id, 'sprint_backlog', $request->input('data'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
