@@ -23,7 +23,11 @@ class GenerateInvoice extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        //
+        $project_ids = $models->pluck('project_id')->toArray();
+        $allValuesAreTheSame = (count(array_unique($project_ids)) === 1);
+        if (!$allValuesAreTheSame) {
+            return Action::danger('Tasks should belongs to a single project!');
+        }
     }
 
     /**
