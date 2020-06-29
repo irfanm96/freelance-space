@@ -22,7 +22,7 @@ class TaskController extends Controller
         return $task;
     }
 
-    public function handleInProdcutionList($project_id, Request $request)
+    public function handleInProductionList($project_id, Request $request)
     {
         ld($request->all());
 
