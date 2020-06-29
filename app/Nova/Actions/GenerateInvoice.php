@@ -2,9 +2,12 @@
 
 namespace App\Nova\Actions;
 
+use App\Project;
+use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Fields\Heading;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Fields\ActionFields;
 use OwenMelbz\RadioField\RadioButton;
@@ -13,6 +16,7 @@ use Illuminate\Queue\InteractsWithQueue;
 class GenerateInvoice extends Action
 {
     use InteractsWithQueue, Queueable;
+    protected $project;
 
     /**
      * Perform the action on the given models.
@@ -29,6 +33,11 @@ class GenerateInvoice extends Action
         }
     }
 
+    public function __construct(Request $request)
+    {
+        $this->project = Project::find($request->input('viaResourceId'));
+    }
+
     /**
      * Get the fields available on the action.
      *
@@ -37,6 +46,7 @@ class GenerateInvoice extends Action
     public function fields()
     {
         return [
+            Heading::make("Invoice for Project " . $this->project->name),
             Image::make('Template1')->preview(function ($value, $disk) {
                 return 'https://via.placeholder.com/150?text="template1"';
             })->readonly(),

@@ -101,7 +101,7 @@ class Task extends Resource
      */
     public function actions(Request $request)
     {
-        return [(new GenerateInvoice())->canSee(function () use ($request) {
+        return [(new GenerateInvoice($request))->canSee(function () use ($request) {
             return ($request->viaResource === 'projects');
         })];
     }
