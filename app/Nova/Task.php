@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\GenerateInvoice;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
@@ -100,7 +101,7 @@ class Task extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [new GenerateInvoice];
     }
 
     public function serializeForIndex(NovaRequest $request, $fields = null)
