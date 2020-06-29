@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Lenses\Lens;
 use Laravel\Nova\Fields\Badge;
-use Wehaa\Liveupdate\Liveupdate;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Http\Requests\LensRequest;
 
@@ -46,8 +45,9 @@ class CompletedTasks extends Lens
                 'in_staging' => 'warning',
                 'in_production' => 'success'
             ]),
-            Liveupdate::make('Hours'),
-            BelongsTo::make('Project')
+            \Wehaa\Liveupdate\Liveupdate::make('Hours')
+                ->updateRules('numeric')->sortable(),
+            BelongsTo::make('Project')->sortable()
         ];
     }
 

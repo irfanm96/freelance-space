@@ -2,13 +2,14 @@
 
 namespace App\Nova;
 
-use App\Nova\Lenses\CompletedTasks;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Badge;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\BelongsTo;
+use App\Nova\Lenses\CompletedTasks;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Task extends Resource
 {
@@ -100,5 +101,24 @@ class Task extends Resource
     public function actions(Request $request)
     {
         return [];
+    }
+
+    public function serializeForIndex(NovaRequest $request, $fields = null)
+    {
+        // Get proper response
+        $serialized = parent::serializeForIndex($request, $fields);
+
+        if ($request->lens && $request->lens == 'completed-tasks') {
+            // If a lens is being viewed
+            $serialized = array_merge($serialized, [
+                'authorizedToView' => false,
+                'authorizedToUpdate' => false,
+                'authorizedToDelete' => false,
+                'authorizedToRestore' => false,
+                'authorizedToForceDelete' => false,
+            ]);
+        }
+
+        return $serialized;
     }
 }

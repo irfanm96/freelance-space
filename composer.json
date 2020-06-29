@@ -27,7 +27,7 @@
         "spatie/laravel-log-dumper": "^1.1",
         "spatie/laravel-permission": "^3.13",
         "vyuldashev/nova-permission": "^2.9",
-        "wehaa/liveupdate": "^0.1.0"
+        "wehaa/liveupdate": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",
@@ -80,6 +80,10 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/irfanm96/inline-field-update.git"
         }
     ]
 }
