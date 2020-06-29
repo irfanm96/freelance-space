@@ -101,7 +101,9 @@ class Task extends Resource
      */
     public function actions(Request $request)
     {
-        return [new GenerateInvoice];
+        return [(new GenerateInvoice())->canSee(function () use ($request) {
+            return ($request->viaResource === 'projects');
+        })];
     }
 
     public function serializeForIndex(NovaRequest $request, $fields = null)
