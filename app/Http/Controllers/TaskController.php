@@ -76,7 +76,7 @@ class TaskController extends Controller
         switch ($action_type) {
             case 'createCard':
                 ld('create card');
-                unset($task['action_type']);
+                unset($task["action_type"]);
                 $this->handleCreateCard($task);
                 break;
             case 'updateCard':
