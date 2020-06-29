@@ -5,6 +5,7 @@ namespace App\Nova;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 
 class Task extends Resource
@@ -45,6 +46,12 @@ class Task extends Resource
             Text::make('Name'),
             Text::make('Trello card', 'trello_card_id'),
             Text::make('type'),
+            Badge::make('type')->map([
+                'sprint_backlog' => 'danger',
+                'in_progress' => 'info',
+                'in_staging' => 'warning',
+                'in_production' => 'success'
+            ]),
             BelongsTo::make('Project')
         ];
     }
