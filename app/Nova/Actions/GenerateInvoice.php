@@ -50,7 +50,7 @@ class GenerateInvoice extends Action
                 2 => 'Template 3',
             ])
             ->default(0) // optional
-            ->stack() // optional (required to show hints)
+            // ->stack() // optional (required to show hints)
             ->marginBetween() // optional
             ->skipTransformation() // optional
             ->toggle([  // optional
