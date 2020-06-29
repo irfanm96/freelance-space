@@ -26,7 +26,7 @@ class TaskController extends Controller
     {
         ld($request->all());
 
-        $task = $this->processPayload($project_id, 'in_production', $request->input('data'));
+        $task = $this->processPayload($project_id, 'in_production', $request->input('action'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
     }
@@ -34,7 +34,7 @@ class TaskController extends Controller
     public function handleInStagingList($project_id, Request $request)
     {
         ld($request->all());
-        $task = $this->processPayload($project_id, 'in_staging', $request->input('data'));
+        $task = $this->processPayload($project_id, 'in_staging', $request->input('action'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
     }
@@ -43,7 +43,7 @@ class TaskController extends Controller
     {
         ld($request->all());
 
-        $task = $this->processPayload($project_id, 'in_progress', $request->input('data'));
+        $task = $this->processPayload($project_id, 'in_progress', $request->input('action'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
     }
@@ -52,7 +52,7 @@ class TaskController extends Controller
     {
         ld($request->all());
 
-        $task = $this->handleCardAction($project_id, 'sprint_backlog', $request->input('data'));
+        $task = $this->handleCardAction($project_id, 'sprint_backlog', $request->input('action'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
     }
