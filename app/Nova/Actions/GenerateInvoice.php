@@ -57,7 +57,6 @@ class GenerateInvoice extends Action
                 0 => ['template2', 'template3'], // will hide max_skips and skip_sponsored when the value is 1
                 1 => ['template1', 'template3'],
                 2 => ['template1', 'template2'],
-                // 2 => ['template3']
             ])
         ];
     }
