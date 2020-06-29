@@ -31,6 +31,8 @@ class TaskController extends Controller
 
     public function handleInStagingList($project_id, Request $request)
     {
+        ld($request->input('action'));
+        return;
         $task = $this->processPayload($project_id, 'in_staging', $request->input('action'));
         $this->handleCardAction($task);
         return response('ok')->setStatusCode(200);
