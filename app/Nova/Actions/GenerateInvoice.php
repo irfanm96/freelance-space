@@ -36,11 +36,11 @@ class GenerateInvoice extends Action
         if (!$project_id) {
             return Action::danger('Tasks should belongs to a single project!');
         }
-        $task_types = $models->pluck('type')->toArray();
-        $not_allowed_types = ['in_staging', 'in_progress', 'sprint_backlog'];
-        if (count(array_intersect($task_types, $not_allowed_types)) > 0) {
-            return Action::danger('Selected Tasks should be in production to generate the invoice!');
-        }
+        // $task_types = $models->pluck('type')->toArray();
+        // $not_allowed_types = ['in_staging', 'in_progress', 'sprint_backlog'];
+        // if (count(array_intersect($task_types, $not_allowed_types)) > 0) {
+        //     return Action::danger('Selected Tasks should be in production to generate the invoice!');
+        // }
         $data = [];
         $data['to'] = $fields->to;
         $data['date'] = $fields->date;
@@ -73,7 +73,7 @@ class GenerateInvoice extends Action
             Trix::make('To')->withMeta(['value' => $billing_to]),
             Select::make('From')->options($bllling_from),
             Date::make('Date')->withMeta(['value' => now()]),
-            Number::make('discount')->withMeta(['value' => 0]),
+            Number::make('Discount')->withMeta(['value' => 0]),
             Image::make('Template1')->preview(function ($value, $disk) {
                 return 'https://via.placeholder.com/150?text="template1"';
             })->readonly(),
@@ -89,7 +89,7 @@ class GenerateInvoice extends Action
                 2 => 'Template 2',
                 3 => 'Template 3',
             ])
-            ->default(0) // optional
+            ->default(1) // optional
             ->marginBetween() // optional
             ->skipTransformation() // optional
             ->toggle([  // optional
