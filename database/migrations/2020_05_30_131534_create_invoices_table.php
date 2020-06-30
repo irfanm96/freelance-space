@@ -16,10 +16,10 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('project_id');
-            $table->date('date');
+            $table->date('date')->default(now());
             $table->float('amount');
             $table->float('discount')->nullable();
-            $table->unsignedInteger('template_id');
+            $table->unsignedInteger('template');
             $table->timestamps();
         });
         Schema::create('invoice_task', function (Blueprint $table) {

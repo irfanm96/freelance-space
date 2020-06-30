@@ -2,10 +2,13 @@
 
 namespace App\Nova;
 
-use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Http\Requests\NovaRequest;
+use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Select;
 
 class Invoice extends Resource
 {
@@ -42,7 +45,16 @@ class Invoice extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Project')
+            Date::make('Date'),
+            Number::make('Amount'),
+            Number::make('Discount'),
+            Select::make('Template')->options([
+                '1' => 'Template 1',
+                '2' => 'Template 2',
+                '3' => 'Template 3'
+            ]),
+            BelongsTo::make('Project'),
+            BelongsToMany::make('Tasks')
         ];
     }
 
