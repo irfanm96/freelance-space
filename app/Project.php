@@ -11,20 +11,29 @@ class Project extends Model
     protected $casts = [
         'type' => 'array'
     ];
+
     public function tasks()
     {
         return $this->hasMany(Task::class);
     }
+
     public function invoices()
     {
         return $this->hasMany(Invoice::class);
     }
+
     public function webhooks()
     {
         return $this->hasMany(Webhook::class);
     }
+
     public function team()
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function getBillingDetails()
+    {
+        return view('partials.billing_to', ['project' => $this])->render();
     }
 }
