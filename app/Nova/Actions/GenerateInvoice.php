@@ -13,6 +13,7 @@ use Illuminate\Support\Collection;
 use Laravel\Nova\Fields\ActionFields;
 use OwenMelbz\RadioField\RadioButton;
 use Illuminate\Queue\InteractsWithQueue;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Trix;
 
 class GenerateInvoice extends Action
@@ -54,10 +55,12 @@ class GenerateInvoice extends Action
     {
         $project = $this->project;
         $billing_to = $project->getBillingDetails();
+        $bllling_from = auth()->user()->bankDetails->pluck('name', 'id')->toArray();
         return [
             Heading::make("<p> Invoice For Project:  $project->name </p><p class='text-sm'>Note: Selected Tasks should be in production to generate the invoice.</p>")->asHtml(),
             Trix::make('To')->withMeta(['value' => $billing_to]),
-            Date::make('Invoice Date'),
+            Select::make('From')->options($bllling_from),
+            Date::make('Invoice Date')->withMeta(['value' => now()]),
             Image::make('Template1')->preview(function ($value, $disk) {
                 return 'https://via.placeholder.com/150?text="template1"';
             })->readonly(),

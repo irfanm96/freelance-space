@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\HasMany;
 use Vyuldashev\NovaPermission\RoleSelect;
 
 class User extends Resource
@@ -62,7 +63,8 @@ class User extends Resource
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
-            BelongsToMany::make('Teams')
+            BelongsToMany::make('Teams'),
+            HasMany::make('BankDetails')
         ];
     }
 
