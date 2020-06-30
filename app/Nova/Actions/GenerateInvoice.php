@@ -5,6 +5,7 @@ namespace App\Nova\Actions;
 use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\Heading;
@@ -53,6 +54,7 @@ class GenerateInvoice extends Action
         return [
             Heading::make("Invoice for Project " . $this->project->name),
             Heading::make('<p class="text-danger text-sm">Note: Selected Tasks should be in production to generate the invoice.</p>')->asHtml(),
+            Date::make('Invoice Date'),
             Image::make('Template1')->preview(function ($value, $disk) {
                 return 'https://via.placeholder.com/150?text="template1"';
             })->readonly(),
