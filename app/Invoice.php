@@ -20,4 +20,9 @@ class Invoice extends Model
     {
         return $this->belongsToMany(Task::class);
     }
+
+    public function bankDetail()
+    {
+        return $this->belongsTo(BankDetail::class);
+    }
 }

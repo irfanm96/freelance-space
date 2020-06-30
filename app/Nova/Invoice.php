@@ -5,10 +5,11 @@ namespace App\Nova;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\Select;
 
 class Invoice extends Resource
 {
@@ -54,6 +55,8 @@ class Invoice extends Resource
                 '3' => 'Template 3'
             ]),
             BelongsTo::make('Project'),
+            BelongsTo::make('BankDetail'),
+            Trix::make('To'),
             BelongsToMany::make('Tasks')
         ];
     }
