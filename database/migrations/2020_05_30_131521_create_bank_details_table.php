@@ -15,6 +15,9 @@ class CreateBankDetailsTable extends Migration
     {
         Schema::create('bank_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('user_id');
+            $table->string('name');
+            $table->text('details');
             $table->timestamps();
         });
     }
