@@ -7,7 +7,6 @@ use Laravel\Nova\Http\Middleware\BootTools;
 use Laravel\Nova\Http\Middleware\DispatchServingNovaEvent;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Nova App Name
@@ -58,7 +57,7 @@ return [
     |
     */
 
-    'path' => '/nova',
+    'path' => '/admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -146,5 +145,4 @@ return [
     */
 
     'currency' => 'USD',
-
 ];

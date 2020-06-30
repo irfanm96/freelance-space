@@ -48,3 +48,7 @@ Route::get('/project/webhook/in_staging/{project}', function (Project $project) 
 Route::get('/project/webhook/in_production/{project}', function (Project $project) {
     return response('ok')->setStatusCode(200);
 })->name('project.webhook.in_production');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
