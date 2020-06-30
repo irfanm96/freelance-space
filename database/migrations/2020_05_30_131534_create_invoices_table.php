@@ -16,10 +16,16 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('project_id');
-            $table->dateTime('from_date');
-            $table->dateTime('to_date');
+            $table->date('date');
             $table->float('amount');
+            $table->float('discount')->nullable();
             $table->unsignedInteger('template_id');
+            $table->timestamps();
+        });
+        Schema::create('invoice_task', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedInteger('invoice_id');
+            $table->unsignedInteger('task_id');
             $table->timestamps();
         });
     }
@@ -32,5 +38,6 @@ class CreateInvoicesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('invoices');
+        Schema::dropIfExists('invoice_task');
     }
 }
