@@ -47,7 +47,6 @@ class Invoice extends Resource
         return [
             ID::make()->sortable(),
             Date::make('Date'),
-            Number::make('Amount'),
             Number::make('Discount'),
             Select::make('Template')->options([
                 '1' => 'Template 1',

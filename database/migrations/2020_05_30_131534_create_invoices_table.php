@@ -17,7 +17,6 @@ class CreateInvoicesTable extends Migration
             $table->id();
             $table->unsignedInteger('project_id');
             $table->date('date')->default(now());
-            $table->float('amount');
             $table->float('discount')->nullable();
             $table->unsignedInteger('bank_detail_id');
             $table->text('to')->nullable();

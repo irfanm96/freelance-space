@@ -2,6 +2,7 @@
 
 namespace App\Nova\Actions;
 
+use App\Invoice;
 use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
@@ -13,6 +14,7 @@ use Illuminate\Support\Collection;
 use Laravel\Nova\Fields\ActionFields;
 use OwenMelbz\RadioField\RadioButton;
 use Illuminate\Queue\InteractsWithQueue;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Trix;
 
@@ -39,6 +41,16 @@ class GenerateInvoice extends Action
         if (count(array_intersect($task_types, $not_allowed_types)) > 0) {
             return Action::danger('Selected Tasks should be in production to generate the invoice!');
         }
+        $data = [];
+        $data['to'] = $fields->to;
+        $data['date'] = $fields->date;
+        $data['template'] = $fields->template;
+        $data['bank_detail_id'] = $fields->from;
+        $data['project_id'] = $this->project->id;
+        $data['discount'] = $fields->discount;
+        $invoice = Invoice::create($data);
+        $invoice->tasks()->attach($models->pluck('id')->toArray());
+        return Action::message('Invoice Generated');
     }
 
     public function __construct(Request $request)
@@ -60,7 +72,8 @@ class GenerateInvoice extends Action
             Heading::make("<p> Invoice For Project:  $project->name </p><p class='text-sm'>Note: Selected Tasks should be in production to generate the invoice.</p>")->asHtml(),
             Trix::make('To')->withMeta(['value' => $billing_to]),
             Select::make('From')->options($bllling_from),
-            Date::make('Invoice Date')->withMeta(['value' => now()]),
+            Date::make('Date')->withMeta(['value' => now()]),
+            Number::make('discount')->withMeta(['value' => 0]),
             Image::make('Template1')->preview(function ($value, $disk) {
                 return 'https://via.placeholder.com/150?text="template1"';
             })->readonly(),
@@ -70,19 +83,19 @@ class GenerateInvoice extends Action
             Image::make('Template3')->preview(function ($value, $disk) {
                 return 'https://via.placeholder.com/150?text="template3"';
             })->readonly(),
-            RadioButton::make('Chose Template')
+            RadioButton::make('Template')
             ->options([
-                0 => 'Template 1',
-                1 => 'Template 2',
-                2 => 'Template 3',
+                1 => 'Template 1',
+                2 => 'Template 2',
+                3 => 'Template 3',
             ])
             ->default(0) // optional
             ->marginBetween() // optional
             ->skipTransformation() // optional
             ->toggle([  // optional
-                0 => ['template2', 'template3'], // will hide max_skips and skip_sponsored when the value is 1
-                1 => ['template1', 'template3'],
-                2 => ['template1', 'template2'],
+                1 => ['template2', 'template3'], // will hide max_skips and skip_sponsored when the value is 1
+                2 => ['template1', 'template3'],
+                3 => ['template1', 'template2'],
             ])
         ];
     }
