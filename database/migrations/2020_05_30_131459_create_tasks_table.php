@@ -19,7 +19,7 @@ class CreateTasksTable extends Migration
             $table->unsignedInteger('project_id');
             $table->string('description')->nullable();
             $table->string('trello_card_id')->nullable();
-            $table->decimal('hours', 3, 1)->nullable();
+            $table->decimal('hours', 3, 1)->default(0.0);
             $table->enum('type', ['sprint_backlog', 'in_progress', 'in_staging', 'in_production'])->default('sprint_backlog');
             $table->dateTime('finished_date')->nullable();
             $table->timestamps();
