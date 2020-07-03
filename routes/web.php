@@ -1,5 +1,6 @@
 <?php
 
+use App\Invoice;
 use App\Project;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/invoice', function () {
-    return view('invoice-templates.template1');
+    $invoice = Invoice::where('id', 1)->with('tasks', 'project')->first();
+    return view('invoice-templates.template1', ['invoice' => $invoice]);
 });
 
 Auth::routes();

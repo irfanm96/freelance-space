@@ -15,10 +15,9 @@
 
 <body class="bg-gray-100 h-screen antialiased leading-none">
     <div class="antialiased sans-serif min-h-screen bg-white" style="min-height: 900px">
-        <div class="border-t-8 border-gray-700 h-2"></div>
         <div class="container mx-auto py-6 px-4">
             <div class="flex justify-between">
-                <h2 class="text-2xl font-bold mb-6 pb-2 tracking-wider uppercase">Invoice</h2>
+                <h2 class="text-2xl font-bold mb-6 pb-2 tracking-wider uppercase">{{$invoice->user->name}} <span class="text-sm lowercase">({{$invoice->user->email}})</span></h2>
                 <div>
                     <div class="relative mr-4 inline-block">
                         <div
@@ -28,8 +27,8 @@
                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
                                 <path
-                                    d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" />
-                                <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
+                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
                                 <rect x="7" y="13" width="10" height="8" rx="2" />
                             </svg>
                         </div>
@@ -46,7 +45,7 @@
                         <div class="flex-1">
                             <p
                                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-                                Invoice number</p>
+                            #IN-{{$invoice->id}}</p>
                         </div>
                     </div>
 
@@ -57,7 +56,7 @@
                         <div class="flex-1">
                             <p
                                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-                                Date</p>
+                            {{$invoice->date->format('yy-m-d')}}</p>
                         </div>
                     </div>
                 </div>
@@ -67,18 +66,14 @@
                 <div class="w-full md:w-1/3 mb-2 md:mb-0">
                     <label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">To:</label>
                     <div class="space-y-3 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight" >
-                        <p>A</p>
-                        <p>A</p>
-                        <p>A</p>
+                        {!!$invoice->to!!}
                     </div>
                 </div>
                 <div class="w-full md:w-1/3">
-                    <label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">From:</label>
+                    <label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">Bank Detail:</label>
                     <div
                         class="space-y-3 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight">
-                        <p>A</p>
-                        <p>A</p>
-                        <p>A</p>
+                        {!!$invoice->bankDetail->details!!}
                     </div>
 
                 </div>
@@ -111,27 +106,31 @@
                 </div>
             </div>
             @php
-            $items = [1,2,3];
+                $total=0;
             @endphp
-            @foreach($items as $item)
+            @foreach($invoice->tasks as $task)
             <div class="flex -mx-1 py-2 border-b">
                 <div class="flex-1 px-1">
-                    <p class="text-gray-800">Task</p>
+                <p class="text-gray-800">{{$task->name}}</p>
+                </div>
+
+                <div class="px-1 w-20 mr-2">
+                    <x-task-badge :type="$task->type"/>
                 </div>
 
                 <div class="px-1 w-20 text-right">
-                    <p class="text-gray-800">Status</p>
-                </div>
-
-                <div class="px-1 w-20 text-right">
-                    <p class="text-gray-800">Time</p>
+                    <p class="text-gray-800">{{$task->hours}}</p>
                 </div>
                 <div class="px-1 w-32 text-right">
-                    <p class="text-gray-800">Rate</p>
+                    <p class="text-gray-800">{{$invoice->project->rate}}</p>
                 </div>
 
                 <div class="px-1 w-32 text-right">
-                    <p class="text-gray-800">amount</p>
+                    @php
+                        $amount = $task->hours * $invoice->project->rate;
+                        $total += $amount;
+                    @endphp
+                    <p class="text-gray-800">{{$amount}}</p>
                 </div>
             </div>
             @endforeach
@@ -140,13 +139,13 @@
                 <div class="flex justify-between mb-3">
                     <div class="text-gray-800 text-right flex-1">Total Amount (USD)</div>
                     <div class="text-right w-40">
-                        <div class="text-gray-800 font-medium">0</div>
+                    <div class="text-gray-800 font-medium">{{$total}}</div>
                     </div>
                 </div>
                 <div class="flex justify-between mb-4">
                     <div class="text-sm text-gray-600 text-right flex-1">Discount (USD)</div>
                     <div class="text-right w-40">
-                        <div class="text-sm text-gray-600" >0</div>
+                    <div class="text-sm text-gray-600" >{{$invoice->discount}}</div>
                     </div>
                 </div>
 
@@ -154,7 +153,7 @@
                     <div class="flex justify-between">
                         <div class="text-xl text-gray-600 text-right flex-1">Amount due</div>
                         <div class="text-right w-40">
-                            <div class="text-xl text-gray-800 font-bold">0</div>
+                            <div class="text-xl text-gray-800 font-bold">{{$total - $invoice->discount}}</div>
                         </div>
                     </div>
                 </div>
