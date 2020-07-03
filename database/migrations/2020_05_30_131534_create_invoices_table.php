@@ -16,11 +16,13 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('project_id');
+            $table->unsignedInteger('user_id');
             $table->date('date')->default(now());
             $table->float('discount')->nullable();
             $table->unsignedInteger('bank_detail_id');
             $table->text('to')->nullable();
             $table->unsignedInteger('template');
+            $table->enum('status', ['cleared', 'pending'])->default('pending');
             $table->timestamps();
         });
         Schema::create('invoice_task', function (Blueprint $table) {

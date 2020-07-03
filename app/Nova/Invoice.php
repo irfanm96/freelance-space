@@ -6,6 +6,7 @@ use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Trix;
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\BelongsTo;
@@ -53,7 +54,16 @@ class Invoice extends Resource
                 '2' => 'Template 2',
                 '3' => 'Template 3'
             ]),
+            Select::make('Status')->options([
+                'pending' => 'Pending',
+                'cleared' => 'Cleared'
+            ])->onlyOnForms(),
+            Badge::make('status')->map([
+                'pending' => 'warning',
+                'cleared' => 'success'
+            ])->exceptOnForms(),
             BelongsTo::make('Project'),
+            BelongsTo::make('User'),
             BelongsTo::make('BankDetail'),
             Trix::make('To'),
             BelongsToMany::make('Tasks')

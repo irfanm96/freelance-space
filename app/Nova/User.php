@@ -64,7 +64,8 @@ class User extends Resource
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
             BelongsToMany::make('Teams'),
-            HasMany::make('BankDetails')
+            HasMany::make('BankDetails'),
+            HasMany::make('Invoices')
         ];
     }
 
