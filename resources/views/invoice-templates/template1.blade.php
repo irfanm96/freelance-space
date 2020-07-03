@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,46 +9,170 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-gray-100 h-screen antialiased leading-none">
-    <div id="app">
-        <nav class="bg-blue-900 shadow mb-8 py-6">
-            <div class="container mx-auto px-6 md:px-0">
-                <div class="flex items-center justify-center">
-                    <div class="mr-6">
-                        <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
-                            {{ config('app.name', 'Laravel') }}
-                        </a>
-                    </div>
-                    <div class="flex-1 text-right">
-                        @guest
-                            <a class="no-underline hover:underline text-gray-300 text-sm p-3" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            @if (Route::has('register'))
-                                <a class="no-underline hover:underline text-gray-300 text-sm p-3" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            @endif
-                        @else
-                            <span class="text-gray-300 text-sm pr-4">{{ Auth::user()->name }}</span>
 
-                            <a href="{{ route('logout') }}"
-                               class="no-underline hover:underline text-gray-300 text-sm p-3"
-                               onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                                {{ csrf_field() }}
-                            </form>
-                        @endguest
+<body class="bg-gray-100 h-screen antialiased leading-none">
+    <div class="antialiased sans-serif min-h-screen bg-white" style="min-height: 900px">
+        <div class="border-t-8 border-gray-700 h-2"></div>
+        <div class="container mx-auto py-6 px-4">
+            <div class="flex justify-between">
+                <h2 class="text-2xl font-bold mb-6 pb-2 tracking-wider uppercase">Invoice</h2>
+                <div>
+                    <div class="relative mr-4 inline-block">
+                        <div
+                            class="text-gray-500 cursor-pointer w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-300 inline-flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer"
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+                                <path
+                                    d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" />
+                                <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
+                                <rect x="7" y="13" width="10" height="8" rx="2" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>
-        </nav>
 
-        @yield('content')
-    </div>
+            <div class="flex mb-8 justify-between">
+                <div class="w-2/4">
+                    <div class="mb-2 md:mb-1 md:flex items-center">
+                        <label class="w-32 text-gray-800 block font-bold text-sm uppercase tracking-wide">Invoice
+                            No.</label>
+                        <span class="mr-4 inline-block md:block">:</span>
+                        <div class="flex-1">
+                            <p
+                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                                Invoice number</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-2 md:mb-1 md:flex items-center">
+                        <label class="w-32 text-gray-800 block font-bold text-sm uppercase tracking-wide">Invoice
+                            Date</label>
+                        <span class="mr-4 inline-block md:block">:</span>
+                        <div class="flex-1">
+                            <p
+                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                                Date</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-between mb-8">
+                <div class="w-full md:w-1/3 mb-2 md:mb-0">
+                    <label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">To:</label>
+                    <p
+                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                        A</p>
+                    <p
+                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                        B</p>
+                    <p
+                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                        C</p>
+                </div>
+                <div class="w-full md:w-1/3">
+                    <label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">From:</label>
+                    <p
+                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                        A</p>
+                    <p
+                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                        B</p>
+                    <p
+                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                        C</p>
+
+                </div>
+            </div>
+
+            <div class="flex -mx-1 border-b py-2 items-start">
+                <div class="flex-1 px-1">
+                    <p class="text-gray-800 uppercase tracking-wide text-sm font-bold">Task Description</p>
+                </div>
+
+                <div class="px-1 w-20 text-right">
+                    <p class="text-gray-800 uppercase tracking-wide text-sm font-bold">Status</p>
+                </div>
+
+                <div class="px-1 w-20 text-right">
+                    <p class="text-gray-800 uppercase tracking-wide text-sm font-bold">Time</p>
+                </div>
+
+                <div class="px-1 w-32 text-right">
+                    <p class="leading-none">
+                        <span class="block uppercase tracking-wide text-sm font-bold text-gray-800">Rate</span>
+                        <span class="font-medium text-xs text-gray-500">(USD/hour)</span>
+                    </p>
+                </div>
+
+                <div class="px-1 w-32 text-right">
+                    <p class="leading-none">
+                        <span class="block uppercase tracking-wide text-sm font-bold text-gray-800">Amount</span>
+                    </p>
+                </div>
+            </div>
+            @php
+            $items = [1,2,3];
+            @endphp
+            @foreach($items as $item)
+            <div class="flex -mx-1 py-2 border-b">
+                <div class="flex-1 px-1">
+                    <p class="text-gray-800">Task</p>
+                </div>
+
+                <div class="px-1 w-20 text-right">
+                    <p class="text-gray-800">Status</p>
+                </div>
+
+                <div class="px-1 w-20 text-right">
+                    <p class="text-gray-800">Time</p>
+                </div>
+                <div class="px-1 w-32 text-right">
+                    <p class="text-gray-800">Rate</p>
+                </div>
+
+                <div class="px-1 w-32 text-right">
+                    <p class="text-gray-800">amount</p>
+                </div>
+            </div>
+            @endforeach
+
+            <div class="py-2 ml-auto mt-5 w-full sm:w-2/4 lg:w-1/4">
+                <div class="flex justify-between mb-3">
+                    <div class="text-gray-800 text-right flex-1">Total Amount (USD)</div>
+                    <div class="text-right w-40">
+                        <div class="text-gray-800 font-medium">0</div>
+                    </div>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <div class="text-sm text-gray-600 text-right flex-1">Discount (USD)</div>
+                    <div class="text-right w-40">
+                        <div class="text-sm text-gray-600" >0</div>
+                    </div>
+                </div>
+
+                <div class="py-2 border-t border-b">
+                    <div class="flex justify-between">
+                        <div class="text-xl text-gray-600 text-right flex-1">Amount due</div>
+                        <div class="text-right w-40">
+                            <div class="text-xl text-gray-800 font-bold">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-10 text-center">
+                <p class="text-gray-600">Created by <a
+                        class="text-blue-600 hover:text-blue-500 border-b-2 border-blue-200 hover:border-blue-300"
+                        href="/">FreelanceSpace</a></p>
+            </div>
+        </div>
 </body>
+
 </html>
