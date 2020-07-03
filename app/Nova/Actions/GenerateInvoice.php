@@ -47,6 +47,7 @@ class GenerateInvoice extends Action
         $data['template'] = $fields->template;
         $data['bank_detail_id'] = $fields->from;
         $data['project_id'] = $this->project->id;
+        $data['user_id'] = auth()->user()->id;
         $data['discount'] = $fields->discount;
         $invoice = Invoice::create($data);
         $invoice->tasks()->attach($models->pluck('id')->toArray());
