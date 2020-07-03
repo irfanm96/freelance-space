@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/invoice', function () {
+    return view('invoice-templates.template1');
+});
 
 Auth::routes();
 Route::view('dashboard', 'dashboard');
@@ -51,4 +54,3 @@ Route::get('/project/webhook/in_production/{project}', function (Project $projec
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
