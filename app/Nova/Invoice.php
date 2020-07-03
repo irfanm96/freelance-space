@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\BelongsTo;
+use Metrixinfo\Nova\Fields\Iframe;
 use Laravel\Nova\Fields\BelongsToMany;
 
 class Invoice extends Resource
@@ -62,6 +63,10 @@ class Invoice extends Resource
                 'pending' => 'warning',
                 'cleared' => 'success'
             ])->exceptOnForms(),
+            Iframe::make('Generated Invoice', function () {
+                $invoice = Invoice::where('id', $this->id)->with('tasks', 'project')->first();
+                return view('invoice-templates.template1', ['invoice' => $invoice])->render();
+            }),
             BelongsTo::make('Project'),
             BelongsTo::make('User'),
             BelongsTo::make('BankDetail'),
