@@ -1,7 +1,3 @@
-<div>
-    <p>Project : {{$project->name}}</p>
-    <p>Owner : {{optional($project->owner)->name}} </p>
-    <p>Email : {{optional($project->owner)->email}} </p>
-    <p>Phone : {{optional($project->owner)->phone}} </p>
-    <p></p>
-</div>
+<p>Project : {{$project->name}}</p>
+<p>Owner : {{optional($project->team->owner)->name}} </p>
+<p>Email : {{optional($project->team->owner)->email}} </p>

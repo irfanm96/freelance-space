@@ -66,27 +66,20 @@
             <div class="flex flex-wrap justify-between mb-8">
                 <div class="w-full md:w-1/3 mb-2 md:mb-0">
                     <label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">To:</label>
-                    <p
-                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-                        A</p>
-                    <p
-                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-                        B</p>
-                    <p
-                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-                        C</p>
+                    <div class="space-y-3 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight" >
+                        <p>A</p>
+                        <p>A</p>
+                        <p>A</p>
+                    </div>
                 </div>
                 <div class="w-full md:w-1/3">
                     <label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">From:</label>
-                    <p
-                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-                        A</p>
-                    <p
-                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-                        B</p>
-                    <p
-                        class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-                        C</p>
+                    <div
+                        class="space-y-3 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight">
+                        <p>A</p>
+                        <p>A</p>
+                        <p>A</p>
+                    </div>
 
                 </div>
             </div>
