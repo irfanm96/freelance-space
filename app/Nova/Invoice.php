@@ -65,7 +65,7 @@ class Invoice extends Resource
             ])->exceptOnForms(),
             Iframe::make('Generated Invoice', function () {
                 $invoice = Invoice::where('id', $this->id)->with('tasks', 'project')->first();
-                return view('invoice-templates.template1', ['invoice' => $invoice])->render();
+                return view("invoice-templates.template$invoice->template", ['invoice' => $invoice, 'iframe' => true])->render();
             }),
             BelongsTo::make('Project'),
             BelongsTo::make('User'),

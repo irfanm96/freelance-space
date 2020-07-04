@@ -18,12 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/invoice', function () {
-    $invoice = Invoice::where('id', 1)->with('tasks', 'project')->first();
-    return view('invoice-templates.template1', ['invoice' => $invoice]);
-});
-
 Auth::routes();
+
+Route::get('/invoice/pdf/{id}', function ($id) {
+    $invoice = Invoice::where('id', $id)->with('tasks', 'project')->first();
+    $pdf = \App::make('dompdf.wrapper');
+    $pdf->loadView("invoice-templates.template$invoice->template", ['invoice' => $invoice, 'iframe' => false]);
+    return $pdf->stream('invoice.pdf');
+})->name('invoice.pdf');
+
 Route::view('dashboard', 'dashboard');
 Route::get('/home', 'HomeController@index')->name('home');
 
