@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use App\Nova\Actions\ViewInvoice;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
@@ -117,8 +116,6 @@ class Invoice extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            (new ViewInvoice)->onlyOnTableRow()
-        ];
+        return [];
     }
 }

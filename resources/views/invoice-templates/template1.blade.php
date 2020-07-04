@@ -151,7 +151,7 @@
 
                 <div class="py-2 border-t border-b">
                     <div class="flex justify-between">
-                        <div class="text-xl text-gray-600 text-right flex-1">Amount due</div>
+                        <div class="text-xl text-gray-600 text-right flex-1">Amount due (USD)</div>
                         <div class="text-right w-40">
                             <div class="text-xl text-gray-800 font-bold">{{$total - $invoice->discount}}</div>
                         </div>
