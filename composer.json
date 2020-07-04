@@ -21,6 +21,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "metrixinfo/nova-iframe": "^1.0",
+        "niklasravnsborg/laravel-pdf": "^4.0",
         "optimistdigital/nova-multiselect-field": "^1.9",
         "owenmelbz/nova-radio-field": "^0.0.5",
         "salfade/freelance": "*",
