@@ -52,4 +52,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Invoice::class);
     }
+
+    /**
+    * @return bool
+    */
+    public function canImpersonate()
+    {
+        return $this->hasRole('super-admin');
+    }
 }

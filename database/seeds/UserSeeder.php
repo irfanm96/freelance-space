@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name'=>'Mohamed Irfan',
+            'name' => 'Mohamed Irfan',
             'email' => 'irfanmm96@gmail.com',
             'password' => bcrypt('secret')
         ])->assignRole('super-admin');
@@ -23,6 +23,10 @@ class UserSeeder extends Seeder
             'email' => 'fawzanm@gmail.com',
             'password' => bcrypt('secret')
         ])->assignRole('super-admin');
-        factory(User::class,50)->create();
+        $roles = ['team-lead', 'project-owner', 'user'];
+        factory(User::class, 50)->create()->each(function ($user) use ($roles) {
+            $role = $roles[array_rand($roles)];
+            $user->assignRole($role);
+        });
     }
 }
