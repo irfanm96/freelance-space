@@ -15,7 +15,7 @@ class TeamSeeder extends Seeder
     public function run()
     {
         factory(Team::class, 10)->create()->each(function ($q) {
-            $q->users()->attach(User::inRandomOrder()->limit(5)->get());
+            $q->users()->attach(User::inRandomOrder()->limit(3)->get());
             $q->projects()->saveMany(factory(Project::class, 1)->make());
         });
     }
