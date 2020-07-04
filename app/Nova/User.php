@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\BelongsToMany;
 use KABBOUCHI\NovaImpersonate\Impersonate;
+use Vyuldashev\NovaPermission\RoleBooleanGroup;
 
 class User extends Resource
 {
@@ -60,6 +61,7 @@ class User extends Resource
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
             MorphToMany::make('Roles', 'roles', \Vyuldashev\NovaPermission\Role::class),
+            RoleBooleanGroup::make('Roles'),
             Password::make('Password')
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')
