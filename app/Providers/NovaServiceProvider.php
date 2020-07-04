@@ -76,9 +76,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-            \Vyuldashev\NovaPermission\NovaPermissionTool::make(),
-            new \KABBOUCHI\LogsTool\LogsTool(),
-
+            \Vyuldashev\NovaPermission\NovaPermissionTool::make()->canSee(function () {
+                return auth()->user()->hasRole('super-admin');
+            }),
+            (new \KABBOUCHI\LogsTool\LogsTool())->canSee(function () {
+                return auth()->user()->hasRole('super-admin');
+            }),
         ];
     }
 

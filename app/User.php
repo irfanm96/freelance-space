@@ -4,6 +4,7 @@ namespace App;
 
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -59,5 +60,22 @@ class User extends Authenticatable
     public function canImpersonate()
     {
         return $this->hasRole('super-admin');
+    }
+
+    /**
+     * @return bool
+     */
+    public function canBeImpersonated()
+    {
+        return !$this->hasRole('super-admin');
+    }
+
+    protected static function booted()
+    {
+        if (auth()->check() && !auth()->user()->hasRole('super-admin')) {
+            static::addGlobalScope('user', function (Builder $builder) {
+                $builder->where('users.id', auth()->user()->id);
+            });
+        }
     }
 }
