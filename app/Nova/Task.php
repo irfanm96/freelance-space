@@ -5,13 +5,14 @@ namespace App\Nova;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
+use App\Nova\Filters\TaskType;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\BelongsTo;
 use App\Nova\Filters\ProjectFilter;
 use App\Nova\Lenses\CompletedTasks;
 use App\Nova\Actions\GenerateInvoice;
-use App\Nova\Filters\TaskType;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Task extends Resource
@@ -36,7 +37,7 @@ class Task extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'name'
     ];
 
     /**
@@ -51,13 +52,19 @@ class Task extends Resource
             ID::make()->sortable(),
             Text::make('Name'),
             Text::make('Trello card', 'trello_card_id'),
-            Badge::make('type')->map([
+            Badge::make('Type')->map([
                 'sprint_backlog' => 'danger',
                 'in_progress' => 'info',
                 'in_staging' => 'warning',
                 'in_production' => 'success'
             ]),
-            Number::make('Hours'),
+            Select::make('Type')->options([
+                'sprint_backlog' => 'danger',
+                'in_progress' => 'info',
+                'in_staging' => 'warning',
+                'in_production' => 'success'
+            ])->onlyOnForms(),
+            Number::make('Hours')->sortable(),
             BelongsTo::make('Project')
         ];
     }
