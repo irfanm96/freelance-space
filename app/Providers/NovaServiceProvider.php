@@ -2,8 +2,15 @@
 
 namespace App\Providers;
 
+use App\Nova\Metrics\InvoicesByStatus;
+use App\Nova\Metrics\NewProjects;
+use App\Nova\Metrics\NewTeams;
+use App\Nova\Metrics\NewUsers;
+use App\Nova\Metrics\ProjectsByType;
+use App\Nova\Metrics\TasksByType;
+use App\Nova\Metrics\UsersPerDay;
+use App\Nova\Metrics\WebhooksByType;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 
@@ -54,7 +61,20 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards()
     {
         return [
-            new Help,
+            (new NewUsers())->canSee(function () {
+                return auth()->user()->hasRole('super-admin');
+            }),
+            (new WebhooksByType())->canSee(function () {
+                return auth()->user()->hasRole('super-admin');
+            }),
+            (new UsersPerDay())->canSee(function () {
+                return auth()->user()->hasRole('super-admin');
+            }),
+            new ProjectsByType(),
+            new NewTeams(),
+            new NewProjects(),
+            new TasksByType(),
+            new InvoicesByStatus()
         ];
     }
 
