@@ -30,7 +30,7 @@ class BankDetail extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'name', 'details'
     ];
 
     /**
@@ -43,7 +43,7 @@ class BankDetail extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make("Name"),
+            Text::make("Name")->sortable(),
             Trix::make("Details"),
             BelongsTo::make("User")
         ];
