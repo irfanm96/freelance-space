@@ -20,6 +20,7 @@ class Project extends Resource
      * @var string
      */
     public static $model = \App\Project::class;
+    public static $group = 'Workspace';
 
     /**
      * The single value that should be used to represent the resource when being displayed.

@@ -23,6 +23,8 @@ class Invoice extends Resource
      */
     public static $model = \App\Invoice::class;
 
+    public static $group = 'Workspace';
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *

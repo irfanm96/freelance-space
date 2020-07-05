@@ -16,6 +16,7 @@ class BankDetail extends Resource
      * @var string
      */
     public static $model = \App\BankDetail::class;
+    public static $group = 'Personal';
 
     /**
      * The single value that should be used to represent the resource when being displayed.

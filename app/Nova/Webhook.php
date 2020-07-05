@@ -17,6 +17,8 @@ class Webhook extends Resource
      */
     public static $model = \App\Webhook::class;
 
+    public static $group = 'Admin';
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *

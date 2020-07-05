@@ -4,7 +4,6 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Quotation extends Resource
 {
@@ -14,6 +13,7 @@ class Quotation extends Resource
      * @var string
      */
     public static $model = \App\Quotation::class;
+    public static $group = 'Workspace';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
