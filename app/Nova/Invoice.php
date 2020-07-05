@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\ProjectFilter;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
@@ -94,7 +95,9 @@ class Invoice extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new ProjectFilter
+        ];
     }
 
     /**

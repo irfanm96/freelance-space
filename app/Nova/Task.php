@@ -2,14 +2,16 @@
 
 namespace App\Nova;
 
-use App\Nova\Actions\GenerateInvoice;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\BelongsTo;
+use App\Nova\Filters\ProjectFilter;
 use App\Nova\Lenses\CompletedTasks;
+use App\Nova\Actions\GenerateInvoice;
+use App\Nova\Filters\TaskType;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Task extends Resource
@@ -79,7 +81,10 @@ class Task extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new ProjectFilter,
+            new TaskType
+        ];
     }
 
     /**
