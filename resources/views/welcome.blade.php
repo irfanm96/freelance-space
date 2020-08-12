@@ -169,24 +169,24 @@
                 <h4 class="text-3xl text-gray-800 font-bold mb-3">
                     Track Tasks from trello
                 </h4>
-                <p class="text-gray-600 mb-8">
+                <p class="text-gray-600 text-xl mb-8">
                     Our platofrom will intergate with trello to monitor your tasks,all of the required tasks will be in sync.
                     We will track down the completed tasks and help you to generate the invoice
                 </p>
             </div>
             <div class="w-full md:w-1/2">
-                <img src="assets/health.svg" alt="Monitoring" />
+                <img src="{{asset('/images/trello.png')}}" alt="Trello" />
             </div>
         </div>
         <div class="flex items-center flex-wrap mb-20">
             <div class="w-full md:w-1/2">
-                <img src="assets/report.svg" alt="Reporting" />
+                <img src="{{asset('/images/reporting.png')}}" alt="Reporting" />
             </div>
             <div class="w-full md:w-1/2 pl-10">
                 <h4 class="text-3xl text-gray-800 font-bold mb-3">
                     Reporting
                 </h4>
-                <p class="text-gray-600 mb-8">
+                <p class="text-gray-600 text-xl mb-8">
                     Our Platfrom will show the statistics of the freelancing projects you are involved
                 </p>
             </div>
@@ -196,17 +196,17 @@
                 <h4 class="text-3xl text-gray-800 font-bold mb-3">
                     Generate Quotations
                 </h4>
-                <p class="text-gray-600 mb-8">
-                    in beta
+                <p class="text-gray-600 text-xl mb-8">
+                    Coming Soon
                 </p>
             </div>
             <div class="w-full md:w-1/2">
-                <img src="assets/sync.svg" alt="Syncing" />
+                <img src="{{asset('/images/quotation.png')}}" alt="Quotations" />
             </div>
         </div>
     </section>
     <!-- Testimonials -->
-    <section class="bg-gray-100">
+    {{-- <section class="bg-gray-100">
         <div class="container mx-auto px-6 py-20">
             <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">
                 Testimonials
@@ -244,7 +244,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--Call to Action-->
     <section style="background-color: #667eea">
         <div class="container mx-auto px-6 text-center py-20">
