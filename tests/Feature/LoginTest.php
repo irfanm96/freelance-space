@@ -14,7 +14,7 @@ class LoginTest extends TestCase
     /**
     * @test
     */
-    public function testSeeLoginPage()
+    public function canSeeLoginPage()
     {
         $this->get('/admin/login')
             ->assertSee('Login')
@@ -35,7 +35,7 @@ class LoginTest extends TestCase
     /**
     * @test
     */
-    public function loginWithCorrectCredentials()
+    public function canLoginWithCorrectCredentials()
     {
         $user = factory(User::class)->create([
             'password' => Hash::make('MyPass')
@@ -51,7 +51,7 @@ class LoginTest extends TestCase
     /**
         * @test
         */
-    public function loginWithWrongEmail()
+    public function cannotLoginWithWrongEmail()
     {
         $user = factory(User::class)->create([
             'password' => Hash::make('MyPass')
@@ -67,7 +67,7 @@ class LoginTest extends TestCase
     /**
           * @test
           */
-    public function loginWithWrongPassword()
+    public function cannotLoginWithWrongPassword()
     {
         $user = factory(User::class)->create([
             'password' => Hash::make('MyPass')

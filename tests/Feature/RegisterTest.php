@@ -90,7 +90,7 @@ class RegisterTest extends TestCase
     /**
          * @test
          */
-    public function cannotRegisterWithPasswordLessThan8Chars()
+    public function cannotRegisterWithWeekPassword()
     {
         $user = factory(User::class)->make([
             'password' => Hash::make('MyPass123')
