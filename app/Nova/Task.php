@@ -51,8 +51,8 @@ class Task extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name'),
-            Text::make('Trello card', 'trello_card_id'),
+            Text::make('Name')->rules(['required', 'min:3']),
+            // Text::make('Trello card', 'trello_card_id'),
             Badge::make('Type')->map([
                 'sprint_backlog' => 'danger',
                 'in_progress' => 'info',
@@ -64,8 +64,8 @@ class Task extends Resource
                 'in_progress' => 'info',
                 'in_staging' => 'warning',
                 'in_production' => 'success'
-            ])->onlyOnForms(),
-            Number::make('Hours')->sortable(),
+            ])->onlyOnForms()->rules('required'),
+            Number::make('Hours')->sortable()->rules(['nullable', 'numeric']),
             BelongsTo::make('Project')
         ];
     }
