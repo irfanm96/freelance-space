@@ -4,7 +4,7 @@ return [
     /*
      * Enable multi-guard feature
      */
-    'enable_multi_guard' => false,
+    'enable_multi_guard' => true,
     /*
      * The default impersonator guard used.
      */
