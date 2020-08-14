@@ -76,13 +76,13 @@ class GenerateInvoice extends Action
             Date::make('Date')->withMeta(['value' => now()]),
             Number::make('Discount')->withMeta(['value' => 0]),
             Image::make('Template1')->preview(function ($value, $disk) {
-                return 'https://via.placeholder.com/150?text="template1"';
+                return 'https://via.placeholder.com/150?text="TailwindCss"';
             })->readonly(),
             Image::make('Template2')->preview(function ($value, $disk) {
-                return 'https://via.placeholder.com/150?text="template2"';
+                return 'https://via.placeholder.com/150?text="ComingSoon.."';
             })->readonly(),
             Image::make('Template3')->preview(function ($value, $disk) {
-                return 'https://via.placeholder.com/150?text="template3"';
+                return 'https://via.placeholder.com/150?text="ComingSoon.."';
             })->readonly(),
             RadioButton::make('Template')
             ->options([
