@@ -163,7 +163,6 @@ return [
         /*
          * Package Service Providers...
          */
-        Lab404\Impersonate\ImpersonateServiceProvider::class,
 
         /*
          * Application Service Providers...

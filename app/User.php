@@ -11,7 +11,6 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
-    // use Impersonate,
 
     /**
      * The attributes that are mass assignable.
@@ -73,6 +72,11 @@ class User extends Authenticatable
 
     protected static function booted()
     {
+        // Some routes need a free pass
+        if (in_array(\Route::currentRouteName(), ['nova.impersonate.leave'])) {
+            return;
+        }
+
         if (auth()->check() && !auth()->user()->hasRole('super-admin')) {
             static::addGlobalScope('user', function (Builder $builder) {
                 $builder->where('users.id', auth()->user()->id);

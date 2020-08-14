@@ -1,0 +1,1 @@
+<a href="{{ route('impersonate', $user->id) }}">Impersonate</a>

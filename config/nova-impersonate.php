@@ -4,7 +4,7 @@ return [
     /*
      * Enable multi-guard feature
      */
-    'enable_multi_guard' => true,
+    'enable_multi_guard' => false,
     /*
      * The default impersonator guard used.
      */
@@ -33,7 +33,7 @@ return [
      * Set true to record impersonation actions in Nova's action_events table
      * Attach the `Laravel\Nova\Actions\Actionable` trait to the `User` Eloquent model
      */
-    'actionable' => env('NOVA_IMPERSONATE_ACTIONABLE', true),
+    'actionable' => env('NOVA_IMPERSONATE_ACTIONABLE', false),
     /*
      * Bind on key press to impersonate user in details page
      */
@@ -49,7 +49,7 @@ return [
         /*
          * Extra middleware used for leave route
          */
-        'leave' => 'web',
+        'leave' => 'auth',
     ],
     /*
      * Leave impersonate before impersonating a user

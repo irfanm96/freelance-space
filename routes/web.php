@@ -58,5 +58,3 @@ Route::get('/project/webhook/in_production/{project}', function (Project $projec
 })->name('project.webhook.in_production');
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-// Route::impersonate();
