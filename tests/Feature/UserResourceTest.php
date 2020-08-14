@@ -25,31 +25,7 @@ class UserResourceTest extends NovaTestCase
             'resource' => [
                 'id' => [
                     'value' => $this->user->id,
-                ],
-                'fields' => [
-                    [
-                        'component' => 'text-field',
-                        'attribute' => 'id',
-                        'value' => $this->user->id,
-                    ],
-                    [
-                        'component' => 'file-field',
-                        'name' => 'Avatar',
-                        'attribute' => 'email',
-                        'value' => null,
-                        'thumbnailUrl' => 'https://www.gravatar.com/avatar/' . md5($this->user->email) . '?s=300',
-                    ],
-                    [
-                        'component' => 'text-field',
-                        'attribute' => 'name',
-                        'value' => $this->user->name,
-                    ],
-                    [
-                        'component' => 'text-field',
-                        'attribute' => 'email',
-                        'value' => $this->user->email,
-                    ],
-                ],
+                ]
             ],
         ]);
     }

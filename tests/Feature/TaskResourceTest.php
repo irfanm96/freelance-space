@@ -29,18 +29,6 @@ class TaskResourceTest extends NovaTestCase
                 'id' => [
                     'value' => $task->id,
                 ],
-                'fields' => [
-                    [
-                        'component' => 'text-field',
-                        'attribute' => 'id',
-                        'value' => $task->id,
-                    ],
-                    [
-                        'component' => 'text-field',
-                        'attribute' => 'name',
-                        'value' => $task->name,
-                    ],
-                ],
             ],
         ]);
     }
