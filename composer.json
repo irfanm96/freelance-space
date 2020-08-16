@@ -38,6 +38,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",
+        "beyondcode/laravel-er-diagram-generator": "^1.4",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "laravel-frontend-presets/tailwindcss": "^4.1",
