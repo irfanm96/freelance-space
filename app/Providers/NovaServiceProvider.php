@@ -74,7 +74,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new NewTeams(),
             new NewProjects(),
             new TasksByType(),
-            new InvoicesByStatus()
+            new InvoicesByStatus(),
         ];
     }
 

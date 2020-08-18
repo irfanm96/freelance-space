@@ -2,9 +2,9 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Trix;
 
@@ -31,7 +31,7 @@ class BankDetail extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'details'
+        'id', 'name', 'details',
     ];
 
     /**
@@ -46,7 +46,7 @@ class BankDetail extends Resource
             ID::make()->sortable(),
             Text::make("Name")->sortable(),
             Trix::make("Details"),
-            BelongsTo::make("User")
+            BelongsTo::make("User"),
         ];
     }
 

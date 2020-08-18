@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Project;
 use App\Task;
-use Tests\NovaTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\NovaTestCase;
 
 class TaskResourceTest extends NovaTestCase
 {
@@ -76,7 +76,7 @@ class TaskResourceTest extends NovaTestCase
         $this->post('/nova-api/tasks/', $task->getAttributes())
         ->assertRedirect()
         ->assertSessionHasErrors([
-            'name'
+            'name',
         ]);
     }
 

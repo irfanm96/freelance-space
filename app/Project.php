@@ -2,15 +2,15 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
     protected $guarded = [];
 
     protected $casts = [
-        'type' => 'array'
+        'type' => 'array',
     ];
 
     public function tasks()
@@ -40,7 +40,7 @@ class Project extends Model
 
     protected static function booted()
     {
-        if (auth()->check() && !auth()->user()->hasRole('super-admin')) {
+        if (auth()->check() && ! auth()->user()->hasRole('super-admin')) {
             static::addGlobalScope('user_project', function (Builder $builder) {
                 $builder->whereHas('team', function ($q) {
                     $q->whereIn('id', auth()->user()->teams->pluck('id')->toArray())

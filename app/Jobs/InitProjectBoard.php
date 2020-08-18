@@ -5,11 +5,11 @@ namespace App\Jobs;
 use App\Project;
 use App\Webhook;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Http;
 
 class InitProjectBoard implements ShouldQueue
 {
@@ -48,6 +48,7 @@ class InitProjectBoard implements ShouldQueue
 
         if ($response->failed()) {
             ld('could not get borad id , request failed');
+
             return;
         }
         $response = $response->json();
@@ -64,7 +65,7 @@ class InitProjectBoard implements ShouldQueue
                         'project_id' => $this->project->id,
                         'list_id' => $list_id,
                         'webhook_id' => $webhook_id,
-                        'webhook_type' => $list['type']
+                        'webhook_type' => $list['type'],
                     ]);
                 }
             }
@@ -78,12 +79,13 @@ class InitProjectBoard implements ShouldQueue
             'name' => $name,
             'idBoard' => $board_id,
             'key' => $api_key,
-            'token' => $api_token
+            'token' => $api_token,
         ]);
         if ($response->failed()) {
             return null;
         }
         $response = $response->json();
+
         return $response['id'];
     }
     public function createWebHook($list_id, $description, $type)
@@ -98,16 +100,18 @@ class InitProjectBoard implements ShouldQueue
             'description' => $description,
             'token' => $api_token,
             // 'callbackURL' => route("project.webhook.$type", $this->project->id)
-            'callbackURL' => route("project.webhook.$type", $this->project->id)
+            'callbackURL' => route("project.webhook.$type", $this->project->id),
         ]);
         if ($response->failed()) {
             ld($response->body());
             ld('webhook creation failed');
+
             return null;
         }
         $response = $response->json();
         ld('webhook created sucessfully');
         ld($response);
+
         return $response['id'];
     }
 }

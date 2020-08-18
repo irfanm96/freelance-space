@@ -3,8 +3,8 @@
 namespace App\Nova\Metrics;
 
 use App\User;
-use Laravel\Nova\Metrics\Value;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Metrics\Value;
 
 class NewUsers extends Value
 {

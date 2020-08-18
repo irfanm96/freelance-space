@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\User;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
@@ -30,14 +30,14 @@ class RegisterTest extends TestCase
     public function registerWithCorrectCredentials()
     {
         $user = factory(User::class)->make([
-            'password' => Hash::make('MyPass123')
+            'password' => Hash::make('MyPass123'),
         ]);
         $this->call('POST', '/register', [
             'name' => $user->name,
             'email' => $user->email,
             'password' => 'MyPass123',
             'password_confirmation' => 'MyPass123',
-            '_token' => csrf_token()
+            '_token' => csrf_token(),
         ])
         ->assertSessionHasNoErrors();
 
@@ -52,14 +52,14 @@ class RegisterTest extends TestCase
     public function cannotRegisterWithExitingEmail()
     {
         $user = factory(User::class)->create([
-            'password' => Hash::make('MyPass123')
+            'password' => Hash::make('MyPass123'),
         ]);
         $this->call('POST', '/register', [
             'name' => $user->name,
             'email' => $user->email,
             'password' => 'MyPass123',
             'password_confirmation' => 'MyPass123',
-            '_token' => csrf_token()
+            '_token' => csrf_token(),
         ])
         ->assertSessionHasErrors(['email']);
 
@@ -74,11 +74,11 @@ class RegisterTest extends TestCase
     public function cannotRegisterWithAnEmptyName()
     {
         $user = factory(User::class)->make([
-            'password' => Hash::make('MyPass123')
+            'password' => Hash::make('MyPass123'),
         ]);
         $this->call('POST', '/register', [
             'name' => '',
-            '_token' => csrf_token()
+            '_token' => csrf_token(),
         ])
         ->assertSessionHasErrors(['name']);
 
@@ -93,12 +93,12 @@ class RegisterTest extends TestCase
     public function cannotRegisterWithWeekPassword()
     {
         $user = factory(User::class)->make([
-            'password' => Hash::make('MyPass123')
+            'password' => Hash::make('MyPass123'),
         ]);
         $this->call('POST', '/register', [
             'name' => $user->name,
             'password' => '12121',
-            '_token' => csrf_token()
+            '_token' => csrf_token(),
         ])
         ->assertSessionHasErrors(['password']);
 
@@ -113,14 +113,14 @@ class RegisterTest extends TestCase
     public function cannotRegisterWithWrongPasswordConfirmation()
     {
         $user = factory(User::class)->make([
-            'password' => Hash::make('MyPass123')
+            'password' => Hash::make('MyPass123'),
         ]);
         $this->call('POST', '/register', [
             'name' => $user->name,
             'email' => $user->email,
             'password' => 'MyPass123',
             'password_confirmation' => 'MyPass12312',
-            '_token' => csrf_token()
+            '_token' => csrf_token(),
         ])
         ->assertSessionHasErrors(['password']);
 

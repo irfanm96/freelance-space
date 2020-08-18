@@ -2,17 +2,17 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\ID;
-use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Text;
+use App\Nova\Actions\GenerateInvoice;
+use App\Nova\Filters\ProjectFilter;
 use App\Nova\Filters\TaskType;
+use App\Nova\Lenses\CompletedTasks;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Badge;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\BelongsTo;
-use App\Nova\Filters\ProjectFilter;
-use App\Nova\Lenses\CompletedTasks;
-use App\Nova\Actions\GenerateInvoice;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Task extends Resource
@@ -38,7 +38,7 @@ class Task extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name'
+        'id', 'name',
     ];
 
     /**
@@ -57,16 +57,16 @@ class Task extends Resource
                 'sprint_backlog' => 'danger',
                 'in_progress' => 'info',
                 'in_staging' => 'warning',
-                'in_production' => 'success'
+                'in_production' => 'success',
             ]),
             Select::make('Type')->options([
                 'sprint_backlog' => 'danger',
                 'in_progress' => 'info',
                 'in_staging' => 'warning',
-                'in_production' => 'success'
+                'in_production' => 'success',
             ])->onlyOnForms()->rules('required'),
             Number::make('Hours')->sortable()->rules(['nullable', 'numeric']),
-            BelongsTo::make('Project')
+            BelongsTo::make('Project'),
         ];
     }
 
@@ -91,7 +91,7 @@ class Task extends Resource
     {
         return [
             new ProjectFilter,
-            new TaskType
+            new TaskType,
         ];
     }
 

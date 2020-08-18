@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\User;
-use Tests\NovaTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\NovaTestCase;
 
 class UserResourceTest extends NovaTestCase
 {
@@ -25,7 +25,7 @@ class UserResourceTest extends NovaTestCase
             'resource' => [
                 'id' => [
                     'value' => $this->user->id,
-                ]
+                ],
             ],
         ]);
     }

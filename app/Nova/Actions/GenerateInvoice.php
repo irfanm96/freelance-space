@@ -4,19 +4,19 @@ namespace App\Nova\Actions;
 
 use App\Invoice;
 use App\Project;
-use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
-use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Actions\Action;
-use Laravel\Nova\Fields\Heading;
-use Illuminate\Support\Collection;
-use Laravel\Nova\Fields\ActionFields;
-use OwenMelbz\RadioField\RadioButton;
+use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Collection;
+use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Fields\ActionFields;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\Heading;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Trix;
+use OwenMelbz\RadioField\RadioButton;
 
 class GenerateInvoice extends Action
 {
@@ -33,7 +33,7 @@ class GenerateInvoice extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         $project_id = request('viaResourceId');
-        if (!$project_id) {
+        if (! $project_id) {
             return Action::danger('Tasks should belongs to a single project!');
         }
         // $task_types = $models->pluck('type')->toArray();
@@ -51,6 +51,7 @@ class GenerateInvoice extends Action
         $data['discount'] = $fields->discount;
         $invoice = Invoice::create($data);
         $invoice->tasks()->attach($models->pluck('id')->toArray());
+
         return Action::message('Invoice Generated');
     }
 
@@ -69,6 +70,7 @@ class GenerateInvoice extends Action
         $project = $this->project;
         $billing_to = $project->getBillingDetails();
         $bllling_from = auth()->user()->bankDetails->pluck('name', 'id')->toArray();
+
         return [
             Heading::make("<p> Invoice For Project:  $project->name </p><p class='text-sm'>Note: Selected Tasks should be in production to generate the invoice.</p>")->asHtml(),
             Trix::make('To')->withMeta(['value' => $billing_to]),
@@ -97,7 +99,7 @@ class GenerateInvoice extends Action
                 1 => ['template2', 'template3'], // will hide max_skips and skip_sponsored when the value is 1
                 2 => ['template1', 'template3'],
                 3 => ['template1', 'template2'],
-            ])
+            ]),
         ];
     }
 }

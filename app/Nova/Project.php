@@ -3,12 +3,12 @@
 namespace App\Nova;
 
 use App\Nova\Actions\EnableTrello;
-use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use OptimistDigital\MultiselectField\Multiselect;
 
@@ -35,7 +35,7 @@ class Project extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'type'
+        'id', 'name', 'type',
     ];
 
     public function subtitle()
@@ -61,7 +61,7 @@ class Project extends Resource
                     'android' => 'Android',
                     'ios' => 'IOS',
                     'flutter' => 'Flutter',
-                    'web' => 'Web'
+                    'web' => 'Web',
                 ])
                 ->placeholder('Choose project type') // Placeholder text
                 ->saveAsJSON(), // Saves value as JSON if the database column is of JSON type
@@ -118,7 +118,7 @@ class Project extends Resource
     public function actions(Request $request)
     {
         return [
-            new EnableTrello
+            new EnableTrello,
         ];
     }
 }

@@ -18,6 +18,7 @@ class TaskController extends Controller
         $task['trello_card_id'] = $payload['data']['card']['id'];
         $task["action_type"] = $payload['type'];
         $task['display'] = $payload['display'];
+
         return $task;
     }
 
@@ -25,6 +26,7 @@ class TaskController extends Controller
     {
         $task = $this->processPayload($project_id, 'in_production', $request->input('action'));
         $this->handleCardAction($task);
+
         return response('ok')->setStatusCode(200);
     }
 
@@ -32,6 +34,7 @@ class TaskController extends Controller
     {
         $task = $this->processPayload($project_id, 'in_staging', $request->input('action'));
         $this->handleCardAction($task);
+
         return response('ok')->setStatusCode(200);
     }
 
@@ -39,6 +42,7 @@ class TaskController extends Controller
     {
         $task = $this->processPayload($project_id, 'in_progress', $request->input('action'));
         $this->handleCardAction($task);
+
         return response('ok')->setStatusCode(200);
     }
 
@@ -46,6 +50,7 @@ class TaskController extends Controller
     {
         $task = $this->processPayload($project_id, 'sprint_backlog', $request->input('action'));
         $this->handleCardAction($task);
+
         return response('ok')->setStatusCode(200);
     }
 
@@ -67,7 +72,7 @@ class TaskController extends Controller
         }
         ld('update task with ', $data);
         $task = Task::where('trello_card_id', $data['trello_card_id'])->first();
-        if (!$task) {
+        if (! $task) {
             Task::create($data);
         } else {
             $task->update($data);
@@ -83,11 +88,13 @@ class TaskController extends Controller
                 ld('create card');
                 unset($task["action_type"]);
                 $this->handleCreateCard($task);
+
                 break;
             case 'updateCard':
                 ld('update card', $task);
                 unset($task["action_type"]);
                 $this->handleUpdateCard($task);
+
                 break;
             default:
                 break;
