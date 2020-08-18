@@ -65,7 +65,7 @@ class Project extends Resource
                 ])
                 ->placeholder('Choose project type') // Placeholder text
                 ->saveAsJSON(), // Saves value as JSON if the database column is of JSON type
-            Number::make('Rate')->sortable(),
+            Number::make('Rate')->sortable()->help('in USD/hour'),
             Text::make('Board Url', function () {
                 return '<a target="_blank" href="' . $this->board_url . '">' . $this->board_url . '</a>';
             })->asHtml()->exceptOnForms(),
