@@ -21,6 +21,7 @@
         "laravel/nova": "~3.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
+        "lorisleiva/laravel-deployer": "^0.3.2",
         "metrixinfo/nova-iframe": "^1.0",
         "niklasravnsborg/laravel-pdf": "^4.0",
         "optimistdigital/nova-multiselect-field": "^1.9",
