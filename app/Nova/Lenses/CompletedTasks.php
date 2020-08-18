@@ -2,13 +2,13 @@
 
 namespace App\Nova\Lenses;
 
-use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Lenses\Lens;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\LensRequest;
+use Laravel\Nova\Lenses\Lens;
 
 class CompletedTasks extends Lens
 {
@@ -43,11 +43,11 @@ class CompletedTasks extends Lens
                 'sprint_backlog' => 'danger',
                 'in_progress' => 'info',
                 'in_staging' => 'warning',
-                'in_production' => 'success'
+                'in_production' => 'success',
             ]),
             \Wehaa\Liveupdate\Liveupdate::make('Hours')
                 ->updateRules('numeric')->sortable(),
-            BelongsTo::make('Project')->sortable()
+            BelongsTo::make('Project')->sortable(),
         ];
     }
 

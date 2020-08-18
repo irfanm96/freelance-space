@@ -3,16 +3,16 @@
 namespace App\Nova;
 
 use App\Nova\Filters\ProjectFilter;
-use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Fields\Badge;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Trix;
 use Metrixinfo\Nova\Fields\Iframe;
-use Laravel\Nova\Fields\BelongsToMany;
 
 class Invoice extends Resource
 {
@@ -56,25 +56,26 @@ class Invoice extends Resource
             Select::make('Template')->options([
                 '1' => 'Template 1',
                 '2' => 'Template 2',
-                '3' => 'Template 3'
+                '3' => 'Template 3',
             ]),
             Select::make('Status')->options([
                 'pending' => 'Pending',
-                'cleared' => 'Cleared'
+                'cleared' => 'Cleared',
             ])->onlyOnForms(),
             Badge::make('status')->map([
                 'pending' => 'warning',
-                'cleared' => 'success'
+                'cleared' => 'success',
             ])->exceptOnForms(),
             Iframe::make('Generated Invoice', function () {
                 $invoice = Invoice::where('id', $this->id)->with('tasks', 'project')->first();
+
                 return view("invoice-templates.template$invoice->template", ['invoice' => $invoice, 'iframe' => true])->render();
             }),
             BelongsTo::make('Project'),
             BelongsTo::make('User'),
             BelongsTo::make('BankDetail'),
             Trix::make('To'),
-            BelongsToMany::make('Tasks')
+            BelongsToMany::make('Tasks'),
         ];
     }
 
@@ -98,7 +99,7 @@ class Invoice extends Resource
     public function filters(Request $request)
     {
         return [
-            new ProjectFilter
+            new ProjectFilter,
         ];
     }
 

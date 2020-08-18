@@ -2,15 +2,15 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\Gravatar;
-use Laravel\Nova\Fields\Password;
-use Laravel\Nova\Fields\MorphToMany;
-use Laravel\Nova\Fields\BelongsToMany;
 use KABBOUCHI\NovaImpersonate\Impersonate;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphToMany;
+use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\Text;
 use Vyuldashev\NovaPermission\RoleBooleanGroup;
 
 class User extends Resource
@@ -70,7 +70,7 @@ class User extends Resource
             Impersonate::make($this),
             BelongsToMany::make('Teams'),
             HasMany::make('BankDetails'),
-            HasMany::make('Invoices')
+            HasMany::make('Invoices'),
         ];
     }
 

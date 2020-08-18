@@ -2,14 +2,14 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
     protected $guarded = [];
     protected $casts = [
-        'date' => 'date'
+        'date' => 'date',
     ];
 
     public function project()
@@ -34,7 +34,7 @@ class Invoice extends Model
 
     protected static function booted()
     {
-        if (auth()->check() && !auth()->user()->hasRole('super-admin')) {
+        if (auth()->check() && ! auth()->user()->hasRole('super-admin')) {
             static::addGlobalScope('user', function (Builder $builder) {
                 $builder->where('user_id', auth()->user()->id);
             });

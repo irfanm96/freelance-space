@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class BankDetail extends Model
 {
@@ -16,7 +16,7 @@ class BankDetail extends Model
 
     protected static function booted()
     {
-        if (auth()->check() && !auth()->user()->hasRole('super-admin')) {
+        if (auth()->check() && ! auth()->user()->hasRole('super-admin')) {
             static::addGlobalScope('user', function (Builder $builder) {
                 $builder->where('user_id', auth()->user()->id);
             });

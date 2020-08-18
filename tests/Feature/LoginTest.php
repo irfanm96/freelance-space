@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\User;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
@@ -38,12 +38,12 @@ class LoginTest extends TestCase
     public function canLoginWithCorrectCredentials()
     {
         $user = factory(User::class)->create([
-            'password' => Hash::make('MyPass')
+            'password' => Hash::make('MyPass'),
         ]);
         $this->call('POST', '/login', [
             'email' => $user->email,
             'password' => 'MyPass',
-            '_token' => csrf_token()
+            '_token' => csrf_token(),
         ])->assertRedirect('/home')
         ->assertSessionHasNoErrors();
     }
@@ -54,12 +54,12 @@ class LoginTest extends TestCase
     public function cannotLoginWithWrongEmail()
     {
         $user = factory(User::class)->create([
-            'password' => Hash::make('MyPass')
+            'password' => Hash::make('MyPass'),
         ]);
         $this->call('POST', '/login', [
             'email' => 'irfan@abc.com',
             'password' => 'MyPass',
-            '_token' => csrf_token()
+            '_token' => csrf_token(),
         ])->assertSessionHasErrors(['email'])
         ->assertRedirect();
     }
@@ -70,12 +70,12 @@ class LoginTest extends TestCase
     public function cannotLoginWithWrongPassword()
     {
         $user = factory(User::class)->create([
-            'password' => Hash::make('MyPass')
+            'password' => Hash::make('MyPass'),
         ]);
         $this->call('POST', '/login', [
             'email' => $user->email,
             'password' => 'wrong pass',
-            '_token' => csrf_token()
+            '_token' => csrf_token(),
         ])->assertSessionHasErrors(['email'])
         ->assertRedirect();
     }

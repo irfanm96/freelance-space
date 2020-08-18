@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
@@ -31,7 +31,7 @@ class Team extends Model
 
     protected static function booted()
     {
-        if (auth()->check() && !auth()->user()->hasRole('super-admin')) {
+        if (auth()->check() && ! auth()->user()->hasRole('super-admin')) {
             static::addGlobalScope('user_team', function (Builder $builder) {
                 $builder->whereHas('users', function ($q) {
                     $q->whereIn('users.id', User::all()->pluck('id')->toArray());

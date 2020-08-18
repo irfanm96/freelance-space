@@ -4,7 +4,6 @@ namespace App\Nova\Actions;
 
 use App\Jobs\InitProjectBoard;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Actions\Action;
@@ -23,8 +22,8 @@ class EnableTrello extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        foreach($models as $project){
-            if($project->board_url != null){
+        foreach ($models as $project) {
+            if ($project->board_url != null) {
                 dispatch(new InitProjectBoard($project));
             }
         }
