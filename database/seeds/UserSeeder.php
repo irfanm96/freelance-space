@@ -15,13 +15,13 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Mohamed Irfan',
             'email' => 'irfanmm96@gmail.com',
-            'password' => bcrypt('secret')
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ])->assignRole('super-admin');
 
         User::create([
             'name' => 'Mohamed Fawzan',
             'email' => 'fawzanm@gmail.com',
-            'password' => bcrypt('secret')
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ])->assignRole('super-admin');
         $roles = ['team-lead', 'project-owner', 'user'];
         factory(User::class, 50)->create()->each(function ($user) use ($roles) {
