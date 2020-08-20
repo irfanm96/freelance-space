@@ -22,6 +22,7 @@ class InitProjectBoard implements ShouldQueue
         ['name' => 'In Progress', 'webhook_description' => 'In Progress webhook', 'type' => 'in_progress'],
         ['name' => 'Sprint BackLog', 'webhook_description' => 'Sprint backlog webhook', 'type' => 'sprint_backlog'],
     ];
+
     /**
      * Create a new job instance.
      *
@@ -47,6 +48,7 @@ class InitProjectBoard implements ShouldQueue
         $response = Http::get("$this->board_url?key=$api_key&token=$api_token");
 
         if ($response->failed()) {
+            ld($response->body());
             ld('could not get borad id , request failed');
 
             return;
@@ -71,6 +73,7 @@ class InitProjectBoard implements ShouldQueue
             }
         }
     }
+
     public function createList($name, $board_id)
     {
         $api_token = env('TRELLO_API_TOKEN');
@@ -88,6 +91,7 @@ class InitProjectBoard implements ShouldQueue
 
         return $response['id'];
     }
+
     public function createWebHook($list_id, $description, $type)
     {
         $api_token = env('TRELLO_API_TOKEN');
