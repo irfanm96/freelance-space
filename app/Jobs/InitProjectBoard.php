@@ -42,8 +42,8 @@ class InitProjectBoard implements ShouldQueue
     public function handle()
     {
         ld('job started');
-        $api_token = env('TRELLO_API_TOKEN');
-        $api_key = env('TRELLO_API_KEY');
+        $api_token = config('services.trello.token');
+        $api_key = config('services.trello.key');
 
         $response = Http::get("$this->board_url?key=$api_key&token=$api_token");
 
