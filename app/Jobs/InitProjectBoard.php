@@ -76,8 +76,8 @@ class InitProjectBoard implements ShouldQueue
 
     public function createList($name, $board_id)
     {
-        $api_token = env('TRELLO_API_TOKEN');
-        $api_key = env('TRELLO_API_KEY');
+        $api_token = config('services.trello.token');
+        $api_key = config('services.trello.key');
         $response = Http::post('https://api.trello.com/1/lists', [
             'name' => $name,
             'idBoard' => $board_id,
@@ -94,8 +94,8 @@ class InitProjectBoard implements ShouldQueue
 
     public function createWebHook($list_id, $description, $type)
     {
-        $api_token = env('TRELLO_API_TOKEN');
-        $api_key = env('TRELLO_API_KEY');
+        $api_token = config('services.trello.token');
+        $api_key = config('services.trello.key');
         $response = Http::withHeaders([
             'Accept' => 'application/json',
         ])->post('https://api.trello.com/1/webhooks/', [
