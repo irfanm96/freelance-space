@@ -25,9 +25,7 @@ Auth::routes();
 
 Route::get('/invoice/pdf/{id}', function ($id) {
     $invoice = Invoice::where('id', $id)->with('tasks', 'project')->first();
-    $pdf = \App::make('dompdf.wrapper');
-    $pdf->loadView("invoice-templates.template$invoice->template", ['invoice' => $invoice, 'iframe' => false]);
-    return $pdf->stream('invoice.pdf');
+    return view("invoice-templates.template$invoice->template", ['invoice' => $invoice, 'iframe' => false]);
 })->name('invoice.pdf');
 
 Route::view('dashboard', 'dashboard');
