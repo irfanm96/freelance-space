@@ -1,7 +1,10 @@
 <?php
 
 use App\Invoice;
+use App\Notifications\ContactFormNotification;
 use App\Project;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 Auth::routes();
 
 Route::get('/invoice/pdf/{id}', function ($id) {
@@ -55,6 +58,17 @@ Route::get('/project/webhook/in_staging/{project}', function (Project $project) 
 
 Route::get('/project/webhook/in_production/{project}', function (Project $project) {
     return response('ok')->setStatusCode(200);
-})->name('project.webhook.in_production');
+})->name('project.webhook.in_produNotification Actionr@index')->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/contact-us', function (Request $request) {
+    $data = $request->validate([
+        'email' => 'required|email:rfc,dns',
+        'message' => 'required|min:10',
+        'phone' => 'required',
+        'name' => 'required|min:3'
+    ]);
+    $admin = User::whereEmail('irfanmm96@gmail.com')->first();
+    $admin->notify(new ContactFormNotification($data));
+    session()->flash('contactSuccess', 'Your response is saved, you will get notified soon');
+    return redirect()->route('index');
+})->name('contact');
