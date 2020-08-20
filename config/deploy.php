@@ -59,6 +59,7 @@ return [
             'artisan:view:clear',
             'artisan:cache:clear',
             'artisan:config:cache',
+            'artisan:horizon:terminate'
             // 'artisan:migrate',
         ],
 
