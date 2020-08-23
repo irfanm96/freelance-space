@@ -23,8 +23,9 @@ class DeleteWebhook extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $webhook) {
-            $api_token = env('TRELLO_API_TOKEN');
-            $api_key = env('TRELLO_API_KEY');
+            $api_token = config('services.trello.token');
+            $api_key = config('services.trello.key');
+
             $response = Http::delete("https://api.trello.com/1/webhooks/$webhook->webhook_id", [
                 'key' => $api_key,
                 'token' => $api_token,
